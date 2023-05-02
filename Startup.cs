@@ -30,6 +30,7 @@ namespace ZooDays
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAnimalRepository, AnimalRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -29,7 +29,7 @@ export default function Header({ isLoggedIn, user }) {
                     <Collapse isOpen={!collapsed} navbar>
                         <Nav className="nav-items" navbar>
                             <NavItem>
-                                <NavLink href="/">Animals</NavLink>
+                                <NavLink href="/animals">Animals</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/">Activities</NavLink>

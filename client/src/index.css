@@ -17,8 +17,6 @@ code {
   background: -webkit-linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
   background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
   backdrop-filter: blur(50px);
-  margin: 10px;
-  border-radius: 10px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }
 
@@ -38,4 +36,22 @@ code {
 
 .navbar-button{
   margin-right: 12px;
+}
+
+.animal-txt{
+  padding: 10px;
+}
+
+.animal-container{
+padding: 10px;
+}
+
+.animal-card{
+  margin: 5px;
+}
+
+.animal-img{
+  object-fit: cover;
+  min-height: 250px;
+  max-height: 350px;
 }
