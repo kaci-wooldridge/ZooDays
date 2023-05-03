@@ -9,5 +9,6 @@ namespace ZooDays.Repositories
         List<Schedule> GetAll();
         Schedule GetById(int id);
         Schedule MakeSchedule(SqlDataReader reader);
+        List<Schedule> GetSchedulesByUserId(int id);
     }
 }

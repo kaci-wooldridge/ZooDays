@@ -1,4 +1,6 @@
-﻿namespace ZooDays.Models
+﻿using System.Collections.Generic;
+
+namespace ZooDays.Models
 {
     public class User
     {
@@ -6,5 +8,6 @@
         public string FirebaseUserId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public List<Schedule> Schedules { get; set; }
     }
 }

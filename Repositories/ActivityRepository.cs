@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using ZooDays.Models;
+using ZooDays.Utils;
 
 namespace ZooDays.Repositories
 {
@@ -73,5 +74,25 @@ namespace ZooDays.Repositories
                 }
             }
         }
+
+        public void Add(ChosenActivity chosenActivity)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO ChosenActivity (ActivityId, ScheduleId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@ActivityId, @ScheduleId)";
+                    DbUtils.AddParameter(cmd, "@ActivityId", chosenActivity.ActivityId);
+                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenActivity.ScheduleId);
+
+                    chosenActivity.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
     }
 }

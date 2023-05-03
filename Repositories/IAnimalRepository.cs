@@ -9,5 +9,7 @@ namespace ZooDays.Repositories
         List<Animal> GetAll();
         Animal GetById(int id);
         Animal MakeAnimal(SqlDataReader reader);
+        void Add(ChosenAnimal chosenAnimal);
+        void Delete(int chosenAnimalId);
     }
 }

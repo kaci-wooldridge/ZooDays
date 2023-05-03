@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
+using System.Linq;
 using ZooDays.Models;
 using ZooDays.Utils;
 
@@ -65,38 +66,60 @@ namespace ZooDays.Repositories
                         LEFT JOIN Restaurant ON cRestaurant.RestaurantId = Restaurant.id";
                     var reader = cmd.ExecuteReader();
 
-
                     var schedules = new List<Schedule>();
 
                     while (reader.Read())
                     {
-                        Schedule schedule = MakeSchedule(reader);
+                        var scheduleId = DbUtils.GetInt(reader, "Id");
+                        var existingSchedule = schedules.FirstOrDefault(s => s.Id == scheduleId);
+                        if (existingSchedule == null)
+                        {
+                            existingSchedule = MakeSchedule(reader);
+                            schedules.Add(existingSchedule);
+                        }
 
                         if (DbUtils.IsNotDbNull(reader, "chosenAnimalId"))
                         {
-                            schedule.ChosenAnimals.Add(new Animal()
+                            var animalId = DbUtils.GetInt(reader, "animalId");
+                            var existingAnimal = schedules[scheduleId - 1].ChosenAnimals.FirstOrDefault(a => a.Id == animalId);
+                            if (existingAnimal == null)
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("animalId")),
-                                Name = reader.GetString(reader.GetOrdinal("animalName"))
-                            });
+                                existingSchedule.ChosenAnimals.Add(new Animal()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("animalId")),
+                                    Name = reader.GetString(reader.GetOrdinal("animalName"))
+                                });
+                            }
                         }
+
                         if (DbUtils.IsNotDbNull(reader, "chosenActivityId"))
                         {
-                            schedule.ChosenActivities.Add(new Activity()
+                            var activityId = DbUtils.GetInt(reader, "activityId");
+                            var existingActivity = schedules[scheduleId - 1].ChosenActivities.FirstOrDefault(a => a.Id == activityId);
+                            if (existingActivity == null)
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("activityId")),
-                                Name = reader.GetString(reader.GetOrdinal("activityName"))
-                            });
+                                existingSchedule.ChosenActivities.Add(new Activity()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("activityId")),
+                                    Name = reader.GetString(reader.GetOrdinal("activityName"))
+                                });
+                            }
                         }
+
                         if (DbUtils.IsNotDbNull(reader, "chosenRestaurantId"))
                         {
-                            schedule.ChosenRestaurants.Add(new Restaurant()
+                            var restaurantId = DbUtils.GetInt(reader, "restaurantId");
+                            var existingRestaurant = schedules[scheduleId - 1].ChosenRestaurants.FirstOrDefault(a => a.Id == restaurantId);
+                            if (existingRestaurant == null)
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("restaurantId")),
-                                Name = reader.GetString(reader.GetOrdinal("restaurantName"))
-                            });
+                                existingSchedule.ChosenRestaurants.Add(new Restaurant()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("restaurantId")),
+                                    Name = reader.GetString(reader.GetOrdinal("restaurantName"))
+                                });
+                            }
                         }
-                        schedules.Add(schedule);
+
                     }
                     reader.Close();
                     return schedules;
@@ -146,8 +169,13 @@ namespace ZooDays.Repositories
                         if (schedule == null)
                         {
                             schedule = MakeSchedule(reader);
+                        }
 
-                            if (DbUtils.IsNotDbNull(reader, "chosenAnimalId"))
+                        if (DbUtils.IsNotDbNull(reader, "chosenAnimalId"))
+                        {
+                            var animalId = DbUtils.GetInt(reader, "animalId");
+                            var existingAnimal = schedule.ChosenAnimals.FirstOrDefault(a => a.Id == animalId);
+                            if (existingAnimal == null)
                             {
                                 schedule.ChosenAnimals.Add(new Animal()
                                 {
@@ -155,7 +183,13 @@ namespace ZooDays.Repositories
                                     Name = reader.GetString(reader.GetOrdinal("animalName"))
                                 });
                             }
-                            if (DbUtils.IsNotDbNull(reader, "chosenActivityId"))
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "chosenActivityId"))
+                        {
+                            var activityId = DbUtils.GetInt(reader, "activityId");
+                            var existingActivity = schedule.ChosenActivities.FirstOrDefault(a => a.Id == activityId);
+                            if (existingActivity == null)
                             {
                                 schedule.ChosenActivities.Add(new Activity()
                                 {
@@ -163,7 +197,13 @@ namespace ZooDays.Repositories
                                     Name = reader.GetString(reader.GetOrdinal("activityName"))
                                 });
                             }
-                            if (DbUtils.IsNotDbNull(reader, "chosenRestaurantId"))
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "chosenRestaurantId"))
+                        {
+                            var restaurantId = DbUtils.GetInt(reader, "restaurantId");
+                            var existingRestaurant = schedule.ChosenRestaurants.FirstOrDefault(a => a.Id == restaurantId);
+                            if (existingRestaurant == null)
                             {
                                 schedule.ChosenRestaurants.Add(new Restaurant()
                                 {
@@ -178,5 +218,102 @@ namespace ZooDays.Repositories
                 }
             }
         }
+
+        public List<Schedule> GetSchedulesByUserId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT 
+                        s.id, s.[Name], s.Day, s.CreatedDate, s.UserId,
+                        u.[Name] AS userName,
+
+                        cAnimal.id AS chosenAnimalId, cAnimal.AnimalId AS animalId,
+                        Animal.[Name] AS animalName,
+
+                        cActivity.id AS chosenActivityId, cActivity.ActivityId AS activityId, 
+                        Activity.[Name] AS activityName,
+
+                        cRestaurant.id AS chosenRestaurantId, cRestaurant.RestaurantId AS restaurantId,
+                        Restaurant.[Name] AS restaurantName
+
+                        FROM Schedule s
+                        LEFT JOIN [User] u ON s.UserId = u.Id
+
+                        LEFT JOIN ChosenAnimal cAnimal ON s.Id = cAnimal.ScheduleId
+                        LEFT JOIN Animal ON cAnimal.AnimalId = Animal.id
+
+                        LEFT JOIN ChosenActivity cActivity ON s.Id = cActivity.ScheduleId
+                        LEFT JOIN Activity ON cActivity.ActivityId = Activity.id
+
+                        LEFT JOIN ChosenRestaurant cRestaurant ON s.Id = cRestaurant.ScheduleId
+                        LEFT JOIN Restaurant ON cRestaurant.RestaurantId = Restaurant.id
+                        WHERE s.UserId = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    var schedules = new List<Schedule>();
+                    while (reader.Read())
+                    {
+                        var scheduleId = DbUtils.GetInt(reader, "Id");
+                        var existingSchedule = schedules.FirstOrDefault(s => s.Id == scheduleId);
+                        if (existingSchedule == null)
+                        {
+                            existingSchedule = MakeSchedule(reader);
+                            schedules.Add(existingSchedule);
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "chosenAnimalId"))
+                        {
+                            var animalId = DbUtils.GetInt(reader, "animalId");
+                            var existingAnimal = schedules[scheduleId - 1].ChosenAnimals.FirstOrDefault(a => a.Id == animalId);
+                            if (existingAnimal == null)
+                            {
+                                existingSchedule.ChosenAnimals.Add(new Animal()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("animalId")),
+                                    Name = reader.GetString(reader.GetOrdinal("animalName"))
+                                });
+                            }
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "chosenActivityId"))
+                        {
+                            var activityId = DbUtils.GetInt(reader, "activityId");
+                            var existingActivity = schedules[scheduleId - 1].ChosenActivities.FirstOrDefault(a => a.Id == activityId);
+                            if (existingActivity == null)
+                            {
+                                existingSchedule.ChosenActivities.Add(new Activity()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("activityId")),
+                                    Name = reader.GetString(reader.GetOrdinal("activityName"))
+                                });
+                            }
+                        }
+
+                        if (DbUtils.IsNotDbNull(reader, "chosenRestaurantId"))
+                        {
+                            var restaurantId = DbUtils.GetInt(reader, "restaurantId");
+                            var existingRestaurant = schedules[scheduleId - 1].ChosenRestaurants.FirstOrDefault(a => a.Id == restaurantId);
+                            if (existingRestaurant == null)
+                            {
+                                existingSchedule.ChosenRestaurants.Add(new Restaurant()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("restaurantId")),
+                                    Name = reader.GetString(reader.GetOrdinal("restaurantName"))
+                                });
+                            }
+                        }
+
+                    }
+                    reader.Close();
+                    return schedules;
+                }
+            }
+        }
+
     }
 }
