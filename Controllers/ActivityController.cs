@@ -5,26 +5,24 @@ namespace ZooDays.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AnimalController : ControllerBase
+    public class ActivityController : ControllerBase
     {
-        private readonly IAnimalRepository _animalRepository;
-        public AnimalController(IAnimalRepository animalRepository)
+        private readonly IActivityRepository _activityRepository;
+        public ActivityController(IActivityRepository activityRepository)
         {
-            _animalRepository = animalRepository;
+            _activityRepository = activityRepository;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_animalRepository.GetAll());
+            return Ok(_activityRepository.GetAll());
         }
 
         [HttpGet("details/{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(_animalRepository.GetById(id));
+            return Ok(_activityRepository.GetById(id));
         }
     }
 }
-
-

@@ -31,6 +31,8 @@ namespace ZooDays
         {
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAnimalRepository, AnimalRepository>();
+            services.AddTransient<IActivityRepository, ActivityRepository>();
+            services.AddTransient<IRestaurantRepository, RestaurantRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
