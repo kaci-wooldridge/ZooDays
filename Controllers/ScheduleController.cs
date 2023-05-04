@@ -47,5 +47,13 @@ namespace ZooDays.Controllers
             _scheduleRepository.Add(schedule);
             return CreatedAtAction("Get", new { id = schedule.Id }, schedule);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _scheduleRepository.Delete(id);
+            return NoContent();
+        }
+
     }
 }

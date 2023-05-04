@@ -2,6 +2,16 @@ import { getToken } from "./authManager";
 
 const baseUrl = "/api/schedule";
 
+export const getScheduleById = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/details/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => res.json());
+    })
+};
 
 export const addSchedule = (schedule) => {
     return getToken().then((token) => {
@@ -12,6 +22,17 @@ export const addSchedule = (schedule) => {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(schedule),
+        });
+    })
+};
+
+export const deleteSchedule = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
     })
 };

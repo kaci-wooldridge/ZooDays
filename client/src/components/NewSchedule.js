@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addSchedule } from '../modules/scheduleManager';
+import { getSchedulesForCurrentUser } from '../modules/userManager';
 
-export default function NewSchedule() {
+export default function NewSchedule( {setSchedules} ) {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
@@ -23,7 +24,7 @@ export default function NewSchedule() {
 
     const handleSave = (evt) => {
         evt.preventDefault();
-        addSchedule(schedule);
+        addSchedule(schedule).then(() => getSchedulesForCurrentUser().then((schedules) => setSchedules(schedules)));
         toggle();
     };
 
@@ -53,7 +54,7 @@ export default function NewSchedule() {
                 <ModalFooter>
                     <Button color="success"
                         onClick={(e) => {handleSave(e);}}>
-                        Do Something
+                        Save
                     </Button>{' '}
                     <Button color="secondary" onClick={toggle}>
                         Cancel

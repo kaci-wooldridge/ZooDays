@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
 import { Table } from 'reactstrap';
 import NewSchedule from './NewSchedule';
+import { useNavigate } from 'react-router-dom';
 
 export default function Schedules() {
     const [schedules, setSchedules] = useState([]);
+    const navigate = useNavigate();
 
     const getSchedules = () => {
         getSchedulesForCurrentUser().then(schedules => setSchedules(schedules));
@@ -21,7 +23,7 @@ export default function Schedules() {
                     Schedules
                 </h1>
                 <div className="new-button">
-                    <NewSchedule />
+                    <NewSchedule setSchedules={setSchedules} />
                 </div>
             </div>
             <Table hover>
@@ -35,7 +37,7 @@ export default function Schedules() {
                 <tbody>
                     {schedules.map((schedule) => {
                         return (
-                            <tr key={schedule.id} style={{ cursor: 'pointer' }}>
+                            <tr key={schedule.id} style={{ cursor: 'pointer' }} onClick={()=>navigate(`/schedules/${schedule.id}`)}>
                                 <td>{schedule.name}</td>
                                 <td>{schedule.day}</td>
                                 <td>{schedule.createdDate}</td>
