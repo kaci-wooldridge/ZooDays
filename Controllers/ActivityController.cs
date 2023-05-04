@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ZooDays.Models;
 using ZooDays.Repositories;
 
 namespace ZooDays.Controllers
@@ -23,6 +24,20 @@ namespace ZooDays.Controllers
         public IActionResult GetById(int id)
         {
             return Ok(_activityRepository.GetById(id));
+        }
+
+        [HttpPost]
+        public IActionResult AddChosenActivity(ChosenActivity chosenActivity)
+        {
+            _activityRepository.Add(chosenActivity);
+            return CreatedAtAction(nameof(Get), new { id = chosenActivity.Id }, chosenActivity);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _activityRepository.Delete(id);
+            return NoContent();
         }
     }
 }

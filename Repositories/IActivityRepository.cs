@@ -9,5 +9,7 @@ namespace ZooDays.Repositories
         List<Activity> GetAll();
         Activity GetById(int id);
         Activity MakeActivity(SqlDataReader reader);
+        void Add(ChosenActivity chosenActivity);
+        void Delete(int chosenActivityId);
     }
 }

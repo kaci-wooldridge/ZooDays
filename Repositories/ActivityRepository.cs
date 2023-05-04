@@ -94,5 +94,23 @@ namespace ZooDays.Repositories
             }
         }
 
+        public void Delete(int chosenActivityId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM ChosenActivity
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", chosenActivityId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

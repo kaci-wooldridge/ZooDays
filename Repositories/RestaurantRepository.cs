@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using ZooDays.Models;
+using ZooDays.Utils;
 
 namespace ZooDays.Repositories
 {
@@ -71,5 +72,43 @@ namespace ZooDays.Repositories
                 }
             }
         }
+
+        public void Add(ChosenRestaurant chosenRestaurant)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO ChosenRestaurant (RestaurantId, ScheduleId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@RestaurantId, @ScheduleId)";
+                    DbUtils.AddParameter(cmd, "@RestaurantId", chosenRestaurant.RestaurantId);
+                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenRestaurant.RestaurantId);
+
+                    chosenRestaurant.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int chosenRestaurantId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            DELETE FROM ChosenRestaurant
+                            WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", chosenRestaurantId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

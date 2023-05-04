@@ -32,6 +32,13 @@ namespace ZooDays.Controllers
             _animalRepository.Add(chosenAnimal);
             return CreatedAtAction(nameof(Get), new { id = chosenAnimal.Id }, chosenAnimal);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _animalRepository.Delete(id);
+            return NoContent();
+        }
     }
 }
 
