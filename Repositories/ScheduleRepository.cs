@@ -315,5 +315,26 @@ namespace ZooDays.Repositories
             }
         }
 
+        public void Add(Schedule schedule)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Schedule (Name, Day, CreatedDate, UserId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@Name, @Day, @CreatedDate, @UserId)";
+                    DbUtils.AddParameter(cmd, "@Name", schedule.Name);
+                    DbUtils.AddParameter(cmd, "@Day", schedule.Day);
+                    DbUtils.AddParameter(cmd, "@CreatedDate", schedule.CreatedDate);
+                    DbUtils.AddParameter(cmd, "@UserId", schedule.UserId);
+
+                    schedule.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
     }
 }

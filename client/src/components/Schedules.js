@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
 import { Table } from 'reactstrap';
+import NewSchedule from './NewSchedule';
 
 export default function Schedules() {
     const [schedules, setSchedules] = useState([]);
@@ -20,7 +21,7 @@ export default function Schedules() {
                     Schedules
                 </h1>
                 <div className="new-button">
-                    <button className="btn btn-outline-primary btn-lg">New Schedule</button>
+                    <NewSchedule />
                 </div>
             </div>
             <Table hover>
