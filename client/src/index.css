@@ -55,3 +55,18 @@ padding: 10px;
   min-height: 250px;
   max-height: 350px;
 }
+
+.container-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.new-button {
+  margin-right: 20px;
+  margin-top: 10px;
+}

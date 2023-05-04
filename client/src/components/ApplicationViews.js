@@ -3,7 +3,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
-import Animals from "./Animals";
+import ActivitiesPage from "./ActivitiesPage";
+import AnimalsPage from "./AnimalsPage";
+import Schedules from "./Schedules";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -14,10 +16,15 @@ export default function ApplicationViews({ isLoggedIn }) {
                     element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
                 />
             </Route>
-            <Route path="animals">
-                <Route index element={<Animals />} />
+            <Route path="schedules">
+                <Route index element={<Schedules />} />
             </Route>
-
+            <Route path="animals">
+                <Route index element={<AnimalsPage />} />
+            </Route>
+            <Route path="activities">
+                <Route index element={<ActivitiesPage />} />
+            </Route>
 
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

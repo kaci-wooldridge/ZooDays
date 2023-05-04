@@ -44,6 +44,29 @@ namespace ZooDays.Repositories
             }
         }
 
+        public List<Animal> GetAllImages()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT a.ImageUrl
+                        FROM Animal a";
+                    var reader = cmd.ExecuteReader();
+
+                    var animals = new List<Animal>();
+                    while (reader.Read())
+                    {
+                        animals.Add(MakeAnimal(reader));
+                    }
+                    reader.Close();
+                    return animals;
+                }
+            }
+        }
+
         public Animal GetById(int id)
         {
             using (var conn = Connection)

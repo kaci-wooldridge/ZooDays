@@ -12,9 +12,11 @@ namespace ZooDays.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly IScheduleRepository _scheduleRepository;
+        public UserController(IUserRepository userRepository, IScheduleRepository scheduleRepository)
         {
             _userRepository = userRepository;
+            _scheduleRepository = scheduleRepository;
         }
 
         [HttpGet]
@@ -72,6 +74,14 @@ namespace ZooDays.Controllers
                 nameof(GetByFirebaseId),
                 new { firebaseUserId = user.FirebaseUserId },
                 user);
+        }
+
+        [HttpGet("schedules")]
+        public IActionResult GetSchedulesByUserId()
+        {
+            var user = GetCurrentUserProfile();
+
+            return Ok(_scheduleRepository.GetSchedulesByUserId(user.Id));
         }
 
     }

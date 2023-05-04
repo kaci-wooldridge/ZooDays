@@ -25,9 +25,9 @@ export default function Animals() {
                     animals.map((animal) => {
                         return (
                             <>
-                                <Col className="fluid animal-container" xs="4" key={animal.id}>
-                                    <Card className="img-fluid border-1 shadow-sm animal-card" key={animal.id} style={{ height: '100%' }}>
-                                        <div className="text-center">
+                                <Col key={animal.id} className="fluid animal-container" xs="4">
+                                    <Card className="img-fluid border-1 shadow-sm animal-card" style={{ height: '100%' }}>
+                                        <div className="text-center" >
                                             {animal.name}
                                         </div>
                                         <img
