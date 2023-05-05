@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteSchedule, getScheduleById } from "../modules/scheduleManager";
 import zoodays1 from "../images/zoodays1.png";
-import { Button, Col, Row, Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import EditScheduleForm from "./EditScheduleForm";
 
 export default function ScheduleDetails() {

@@ -30,15 +30,16 @@ export default function Schedules() {
 
     return (
         <>
-            <div className="schedule-table">
             <div className="container-top">
-                <h1>
+                <div className="schedules-header">
                     Schedules
-                </h1>
+                </div>
                 <div className="new-button">
                     <NewSchedule setSchedules={setSchedules} />
                 </div>
             </div>
+
+            <div className="schedule-table">
             <Table hover>
                 <thead>
                     <tr>

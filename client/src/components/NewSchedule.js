@@ -29,8 +29,8 @@ export default function NewSchedule( {setSchedules} ) {
     };
 
     return (
-        <div>
-            <Button color="info" onClick={toggle}>
+        <>
+            <Button outline color="info" className="new-button" onClick={toggle}>
                 New Schedule
             </Button>
             <Modal isOpen={modal} toggle={toggle}>
@@ -61,6 +61,6 @@ export default function NewSchedule( {setSchedules} ) {
                     </Button>
                 </ModalFooter>
             </Modal>
-        </div>
+        </>
     );
 }

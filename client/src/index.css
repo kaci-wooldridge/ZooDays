@@ -58,8 +58,15 @@ padding: 10px;
 
 .container-top {
   display: flex;
+  margin: 30px;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+}
+
+.schedules-header{
+  font-size: 50px;
+  font-weight: 700;
+
 }
 
 .buttons {
@@ -67,8 +74,6 @@ padding: 10px;
 }
 
 .new-button {
-  margin-right: 20px;
-  margin-top: 10px;
 }
 
 .schedule-buttons{
