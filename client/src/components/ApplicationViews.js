@@ -7,6 +7,7 @@ import ActivitiesPage from "./ActivitiesPage";
 import AnimalsPage from "./AnimalsPage";
 import Schedules from "./Schedules";
 import ScheduleDetails from "./ScheduleDetails";
+import Restaurants from "./Restaurants";
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -28,6 +29,9 @@ export default function ApplicationViews({ isLoggedIn }) {
             </Route>
             <Route path="activities">
                 <Route index element={<ActivitiesPage />} />
+            </Route>
+            <Route path="restaurants">
+                <Route index element={<Restaurants />} />
             </Route>
 
             <Route path="login" element={<Login />} />

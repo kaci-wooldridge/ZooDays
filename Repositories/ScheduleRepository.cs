@@ -269,7 +269,7 @@ namespace ZooDays.Repositories
                         if (DbUtils.IsNotDbNull(reader, "chosenAnimalId"))
                         {
                             var animalId = DbUtils.GetInt(reader, "animalId");
-                            var existingAnimal = schedules[scheduleId - 1].ChosenAnimals.FirstOrDefault(a => a.Id == animalId);
+                            var existingAnimal = existingSchedule.ChosenAnimals.FirstOrDefault(a => a.Id == animalId);
                             if (existingAnimal == null)
                             {
                                 existingSchedule.ChosenAnimals.Add(new Animal()
@@ -283,7 +283,7 @@ namespace ZooDays.Repositories
                         if (DbUtils.IsNotDbNull(reader, "chosenActivityId"))
                         {
                             var activityId = DbUtils.GetInt(reader, "activityId");
-                            var existingActivity = schedules[scheduleId - 1].ChosenActivities.FirstOrDefault(a => a.Id == activityId);
+                            var existingActivity = existingSchedule.ChosenActivities.FirstOrDefault(a => a.Id == activityId);
                             if (existingActivity == null)
                             {
                                 existingSchedule.ChosenActivities.Add(new Activity()
@@ -297,7 +297,7 @@ namespace ZooDays.Repositories
                         if (DbUtils.IsNotDbNull(reader, "chosenRestaurantId"))
                         {
                             var restaurantId = DbUtils.GetInt(reader, "restaurantId");
-                            var existingRestaurant = schedules[scheduleId - 1].ChosenRestaurants.FirstOrDefault(a => a.Id == restaurantId);
+                            var existingRestaurant = existingSchedule.ChosenRestaurants.FirstOrDefault(a => a.Id == restaurantId);
                             if (existingRestaurant == null)
                             {
                                 existingSchedule.ChosenRestaurants.Add(new Restaurant()
@@ -344,6 +344,15 @@ namespace ZooDays.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
+                        DELETE FROM ChosenAnimal
+                        WHERE ScheduleId = @id
+
+                        DELETE FROM ChosenActivity
+                        WHERE ScheduleId = @id
+
+                        DELETE FROM ChosenRestaurant
+                        WHERE ScheduleId = @id
+
                         DELETE FROM Schedule
                         WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);

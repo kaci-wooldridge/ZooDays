@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Col, Card } from "reactstrap";
 import { getAllAnimals } from "../modules/animalManager";
+import AddAnimal from "./AddAnimal";
 
 
 export default function Animals() {
@@ -36,7 +37,10 @@ export default function Animals() {
                                             />
                                         <div className="animal-txt text-center">
                                             {animal.description}
-                                        </div>
+                                    </div>
+                                    <div className="text-center">
+                                        <AddAnimal id={animal.id} />
+                                    </div>
                                     </Card>
                                 </Col>
                         );

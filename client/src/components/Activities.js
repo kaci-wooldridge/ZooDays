@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Card, CardFooter } from "reactstrap";
+import { Row, Col, Card, CardFooter, Button } from "reactstrap";
 import { getAllActivities } from "../modules/activityManager";
+import AddActivity from "./AddActivity";
 
 
 export default function Activities() {
@@ -24,7 +25,6 @@ export default function Activities() {
                 {
                     activities.map((activity) => {
                         return (
-                            <>
                                 <Col className="fluid animal-container" xs="4" key={activity.id}>
                                     <Card className="img-fluid border-1 shadow-sm animal-card" key={activity.id} style={{ height: '100%' }}>
                                         <div className="text-center">
@@ -38,9 +38,11 @@ export default function Activities() {
                                         <div className="animal-txt text-center">
                                             {activity.description}
                                         </div>
+                                        <div className="text-center">
+                                            <AddActivity id={activity.id} />
+                                        </div>
                                     </Card>
                                 </Col>
-                            </>
                         );
                     })
                 }

@@ -44,7 +44,7 @@ export default function ScheduleDetails() {
 
                             <div className="text-center mt-3">
                                 <h5 className="mt-2 mb-0">{schedule.name}</h5>
-                                <span>Day of Visit: {schedule.day}</span>
+                                <span>Day of Visit: {new Date(schedule.day).toDateString()}</span>
 
                                 <div className="px-4 mt-1">
                                     <p className="fonts">{}</p>

@@ -4,7 +4,6 @@ import ScheduleDropdown from "./ScheduleDropdown";
 export default function ActivitiesPage() {
     return (
         <>
-            <ScheduleDropdown />
             <Activities />
         </>
     )

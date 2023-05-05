@@ -16,7 +16,8 @@ namespace ZooDays.Repositories
             {
                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                 Name = reader.GetString(reader.GetOrdinal("Name")),
-                Cost = reader.GetString(reader.GetOrdinal("Cost"))
+                Cost = reader.GetString(reader.GetOrdinal("Cost")),
+                ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
             };
         }
 
@@ -28,8 +29,9 @@ namespace ZooDays.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT r.id, r.Name, r.Cost
-                        FROM Restaurant r";
+                        SELECT r.id, r.Name, r.Cost, r.ImageUrl
+                        FROM Restaurant r
+                        ORDER BY r.Cost";
                     var reader = cmd.ExecuteReader();
 
                     var restaurants = new List<Restaurant>();
@@ -51,7 +53,7 @@ namespace ZooDays.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT r.id, r.Name, r.Cost
+                        SELECT r.id, r.Name, r.Cost, r.ImageUrl
                         FROM Restaurant r
                         WHERE r.id = @id";
 
@@ -85,7 +87,7 @@ namespace ZooDays.Repositories
                         OUTPUT INSERTED.ID
                         VALUES (@RestaurantId, @ScheduleId)";
                     DbUtils.AddParameter(cmd, "@RestaurantId", chosenRestaurant.RestaurantId);
-                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenRestaurant.RestaurantId);
+                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenRestaurant.ScheduleId);
 
                     chosenRestaurant.Id = (int)cmd.ExecuteScalar();
                 }

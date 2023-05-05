@@ -38,7 +38,7 @@ export default function Header({ isLoggedIn, user }) {
                                 <NavLink href="/activities">Activities</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/">Restaurants</NavLink>
+                                <NavLink href="/restaurants">Restaurants</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={logout} href="/login">Logout</NavLink>
