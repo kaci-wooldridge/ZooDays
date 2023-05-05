@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
-import { Table } from 'reactstrap';
+import { Button, Table } from 'reactstrap';
 import NewSchedule from './NewSchedule';
 import { useNavigate } from 'react-router-dom';
 import { deleteSchedule } from '../modules/scheduleManager';
+import EditScheduleForm from './EditScheduleForm';
 
 export default function Schedules() {
     const [schedules, setSchedules] = useState([]);
@@ -29,6 +30,7 @@ export default function Schedules() {
 
     return (
         <>
+            <div className="schedule-table">
             <div className="container-top">
                 <h1>
                     Schedules
@@ -52,14 +54,20 @@ export default function Schedules() {
                                 <td onClick={() => navigate(`/schedules/${schedule.id}`)}>{schedule.name}</td>
                                 <td onClick={() => navigate(`/schedules/${schedule.id}`)}>{new Date(schedule.day).toDateString()}</td>
                                 <td className="text-end">
-                                    {/* <button className="edit-button btn btn-dark btn-sm" onClick={() => handleClick2(`${post.id}`)}>Edit</button> */}
-                                    <button className="del-button btn btn-outline-danger btn-sm" onClick={() => handleDelete(`${schedule.id}`)}>Delete</button>
+                                    <div className="schedule-buttons">
+                                        <EditScheduleForm id={schedule.id} setSchedules={setSchedules} />
+
+                                        <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
+                                            Delete
+                                        </Button>
+                                    </div>
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
-            </Table>
+                </Table>
+            </div>
         </>
     )
 }

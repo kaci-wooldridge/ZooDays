@@ -12,5 +12,6 @@ namespace ZooDays.Repositories
         List<Schedule> GetSchedulesByUserId(int id);
         void Add(Schedule schedule);
         void Delete(int id);
+        void Update(Schedule schedule);
     }
 }

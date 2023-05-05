@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
 import {
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
+    Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
+    Button, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { addRestaurant } from '../modules/restaurantManager';

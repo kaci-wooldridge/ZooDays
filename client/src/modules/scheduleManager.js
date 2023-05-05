@@ -36,3 +36,16 @@ export const deleteSchedule = (id) => {
         });
     })
 };
+
+export const editSchedule = (schedule) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${schedule.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(schedule)
+        });
+    })
+};

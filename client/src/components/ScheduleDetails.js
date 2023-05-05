@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteSchedule, getScheduleById } from "../modules/scheduleManager";
 import zoodays1 from "../images/zoodays1.png";
-import { Col, Row, Table } from "reactstrap";
+import { Button, Col, Row, Table } from "reactstrap";
+import EditScheduleForm from "./EditScheduleForm";
 
 export default function ScheduleDetails() {
     const [schedule, setSchedule] = useState({});
@@ -10,7 +11,8 @@ export default function ScheduleDetails() {
     const navigate = useNavigate();
 
     const getSchedules = () => {
-        getScheduleById(id).then(setSchedule)
+        getScheduleById(id)
+            .then(schedule => setSchedule(schedule));
     }
 
     useEffect(() => {
@@ -21,7 +23,7 @@ export default function ScheduleDetails() {
         return null;
     }
 
-    const handleClick = () => {
+    const handleDelete = () => {
         const confirmBox = window.confirm(
             "Do you really want to delete this schedule?"
         )
@@ -119,9 +121,12 @@ export default function ScheduleDetails() {
                                         </tbody>
                                     </Table>
                                 </div>
-                                <div className="buttons">
-                                    <button className="edit-button btn btn-outline-dark btn-sm">Edit</button>
-                                    <button className="btn btn-outline-danger btn-sm" onClick={handleClick}>Delete</button>
+                                <div className="schedule-buttons2">
+                                    <EditScheduleForm id={id} setSchedule={setSchedule} />
+
+                                    <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
+                                        Delete
+                                    </Button>
                                 </ div>
 
                             </div>

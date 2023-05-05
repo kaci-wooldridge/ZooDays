@@ -70,3 +70,21 @@ padding: 10px;
   margin-right: 20px;
   margin-top: 10px;
 }
+
+.schedule-buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.schedule-buttons2{
+  display: flex;
+  justify-content: center;
+}
+
+.del-button{
+  margin-left: 5px;
+}
+
+.schedule-table{
+  margin: 30px;
+}

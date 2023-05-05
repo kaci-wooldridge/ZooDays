@@ -55,5 +55,12 @@ namespace ZooDays.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateSchedule(Schedule schedule)
+        {
+            _scheduleRepository.Update(schedule);
+            return NoContent();
+        }
+
     }
 }
