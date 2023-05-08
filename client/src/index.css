@@ -44,6 +44,7 @@ code {
 
 .animal-container{
 padding: 10px;
+margin-bottom: 40px;
 }
 
 .animal-card{
@@ -121,10 +122,9 @@ padding: 10px;
   aspect-ratio: 8.5/2;
   object-fit: cover;
   object-position: top center;
-  margin-bottom:50px;
+  margin-bottom:100px;
 }
 
-/* Place text in the middle of the image */
 .banner-text {
   text-align: center;
   position: absolute;
@@ -143,4 +143,13 @@ padding: 10px;
   block-size: auto;
   object-fit: cover;
   object-position: center;
+}
+
+.card-top{
+    background: rgb(255, 169, 226);
+    background: -webkit-linear-gradient(to right, rgba(255, 169, 226), rgb(208, 145, 245));
+    background: linear-gradient(to right, rgba(255, 169, 226), rgba(208, 145, 245));
+    backdrop-filter: blur(50px);
+  font-size: 25px;
+  font-weight: 900;
 }

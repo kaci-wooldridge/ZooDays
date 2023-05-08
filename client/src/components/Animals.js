@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Card } from "reactstrap";
+import { Row, Col, Card, CardHeader } from "reactstrap";
 import { getAllAnimals } from "../modules/animalManager";
 import AddAnimal from "./AddAnimal";
 import banner1 from "../images/banner1.png";
@@ -34,13 +34,13 @@ export default function Animals() {
                     animals.map((animal) => {
                         return (
                                 <Col key={animal.id} className="fluid animal-container" xs="4">
-                                    <Card className="img-fluid border-1 shadow-sm animal-card" style={{ height: '100%' }}>
-                                        <div className="text-center" >
+                                <Card className="img-fluid border-2 shadow-sm animal-card" style={{ height: '100%' }}>
+                                        <div className="card-top text-center" >
                                             {animal.name}
                                         </div>
                                         <img
                                                 width="100%"
-                                                className="animal-img img-fluid rounded shadow-lg"
+                                                className="animal-img img-fluid shadow-lg"
                                                 src={animal.imageUrl}
                                             />
                                         <div className="animal-txt text-center">
