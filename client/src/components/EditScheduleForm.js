@@ -4,6 +4,8 @@ import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, M
 import { editSchedule, getScheduleById } from '../modules/scheduleManager';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
 import { deleteAnimal, getChosenAnimalsByScheduleId } from '../modules/animalManager';
+import { deleteActivity, getChosenActivitiesByScheduleId } from '../modules/activityManager';
+import { deleteRestaurant, getChosenRestaurantsByScheduleId } from '../modules/restaurantManager';
 
 export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
     const navigate = useNavigate();
@@ -22,9 +24,19 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
         getChosenAnimalsByScheduleId(id).then(setAnimals);
     }
 
+    const getActivities = () => {
+        getChosenActivitiesByScheduleId(id).then(setActivities);
+    }
+
+    const getRestaurants = () => {
+        getChosenRestaurantsByScheduleId(id).then(setRestaurants);
+    }
+
     useEffect(() => {
         getSchedules();
         getAnimals();
+        getActivities();
+        getRestaurants();
     }, []);
 
     const handleInputChange = (evt) => {
@@ -48,9 +60,27 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
     };
 
     const handleDeleteAnimal = (evt) => {
-        evt.preventDefault();
         const key = evt.target.id;
-        deleteAnimal(key).then(getChosenAnimalsByScheduleId(id).then(setAnimals));
+        deleteAnimal(key)
+            .then(() => {
+                getAnimals();
+            })
+    }
+
+    const handleDeleteActivity = (evt) => {
+        const key = evt.target.id;
+        deleteActivity(key)
+            .then(() => {
+                getActivities();
+            })
+    }
+
+    const handleDeleteRestaurant = (evt) => {
+        const key = evt.target.id;
+        deleteRestaurant(key)
+            .then(() => {
+                getRestaurants();
+            })
     }
 
     return (
@@ -110,7 +140,7 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                             ""
                     }
                     {
-                        scheduleEdit?.chosenActivities?.length >= 1
+                        activities?.length >= 1
                             ?
                             <Table>
                                 <thead>
@@ -121,12 +151,17 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                                 </thead>
                                 <tbody>
                                     {
-                                        scheduleEdit?.chosenActivities.map((activity) => {
+                                        activities?.map((activity) => {
                                             return (
-                                                <tr key={activity.id} style={{ cursor: 'pointer' }}>
-                                                    <td className="list-item" key={activity.id}> {activity.name}</td>
+                                                <tr key={activity.id}>
+                                                    <td className="list-item" key={activity.id}> {activity.activity.name}</td>
                                                     <td className="schedule-buttons">
-                                                        <Button className="btn-sm" outline color="danger">x</Button>
+                                                        <Button className="btn-sm" outline color="danger"
+                                                            style={{ cursor: 'pointer' }}
+                                                            id={activity.id}
+                                                            onClick={(e) => { handleDeleteActivity(e); }}>
+                                                            x
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                             )
@@ -139,7 +174,7 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                             ""
                     }
                     {
-                        scheduleEdit?.chosenRestaurants?.length >= 1
+                        restaurants?.length >= 1
                             ?
                             <Table>
                                 <thead>
@@ -150,12 +185,17 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                                 </thead>
                                 <tbody>
                                     {
-                                        scheduleEdit?.chosenRestaurants.map((restaurant) => {
+                                        restaurants?.map((restaurant) => {
                                             return (
-                                                <tr key={restaurant.id} style={{ cursor: 'pointer' }}>
-                                                    <td className="list-item" key={restaurant.id}> {restaurant.name}</td>
+                                                <tr key={restaurant.id}>
+                                                    <td className="list-item" key={restaurant.id}> {restaurant.restaurant.name}</td>
                                                     <td className="schedule-buttons">
-                                                        <Button className="btn-sm" outline color="danger">x</Button>
+                                                        <Button className="btn-sm" outline color="danger"
+                                                            style={{ cursor: 'pointer' }}
+                                                            id={restaurant.id}
+                                                            onClick={(e) => { handleDeleteRestaurant(e); }}>
+                                                            x
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                             )

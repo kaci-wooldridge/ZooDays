@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using ZooDays.Models;
 using ZooDays.Utils;
@@ -18,6 +19,23 @@ namespace ZooDays.Repositories
                 Name = reader.GetString(reader.GetOrdinal("Name")),
                 Cost = reader.GetString(reader.GetOrdinal("Cost")),
                 ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
+            };
+        }
+
+        public ChosenRestaurant MakeChosenRestaurant(SqlDataReader reader)
+        {
+            return new ChosenRestaurant()
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                RestaurantId = reader.GetInt32(reader.GetOrdinal("RestaurantId")),
+                ScheduleId = reader.GetInt32(reader.GetOrdinal("ScheduleId")),
+                Restaurant = new Restaurant()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("RestaurantId")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    Cost = reader.GetString(reader.GetOrdinal("Cost"))
+                }
             };
         }
 
@@ -75,21 +93,68 @@ namespace ZooDays.Repositories
             }
         }
 
-        public void Add(ChosenRestaurant chosenRestaurant)
+        public List<ChosenRestaurant> GetByScheduleId(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
+                    cmd.CommandText = @"SELECT 
+                        cr.Id, cr.RestaurantId, cr.ScheduleId, 
+                        r.[Name], r.ImageUrl, r.Cost
+                        FROM ChosenRestaurant cr
+                        LEFT JOIN Restaurant r ON cr.RestaurantId = r.Id
+                        WHERE cr.ScheduleId = @id
+                        ORDER BY r.[Name]
+                        ";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    var restaurants = new List<ChosenRestaurant>();
+                    while (reader.Read())
+                    {
+                        restaurants.Add(MakeChosenRestaurant(reader));
+                    }
+                    reader.Close();
+                    return restaurants;
+                }
+            }
+        }
+
+        public void Add(ChosenRestaurant chosenRestaurant)
+        {
+            if (chosenRestaurant == null)
+            {
+                throw new ArgumentNullException(nameof(chosenRestaurant));
+            }
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
                     cmd.CommandText = @"
-                        INSERT INTO ChosenRestaurant (RestaurantId, ScheduleId)
-                        OUTPUT INSERTED.ID
-                        VALUES (@RestaurantId, @ScheduleId)";
+                IF NOT EXISTS
+                (
+                    SELECT cr.RestaurantId, cr.ScheduleId
+                    FROM ChosenRestaurant cr
+                    WHERE cr.RestaurantId = @RestaurantId AND cr.ScheduleId = @ScheduleId
+                )
+                BEGIN
+                INSERT INTO ChosenRestaurant (RestaurantId, ScheduleId)
+                OUTPUT INSERTED.ID
+                VALUES (@RestaurantId, @ScheduleId)
+                END";
                     DbUtils.AddParameter(cmd, "@RestaurantId", chosenRestaurant.RestaurantId);
                     DbUtils.AddParameter(cmd, "@ScheduleId", chosenRestaurant.ScheduleId);
 
-                    chosenRestaurant.Id = (int)cmd.ExecuteScalar();
+                    var id = cmd.ExecuteScalar();
+                    if (id != null)
+                    {
+                        chosenRestaurant.Id = (int)id;
+                    }
                 }
             }
         }

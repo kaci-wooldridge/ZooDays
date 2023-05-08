@@ -6,9 +6,11 @@ namespace ZooDays.Repositories
 {
     public interface IActivityRepository
     {
+        Activity MakeActivity(SqlDataReader reader);
+        ChosenActivity MakeChosenActivity(SqlDataReader reader);
         List<Activity> GetAll();
         Activity GetById(int id);
-        Activity MakeActivity(SqlDataReader reader);
+        List<ChosenActivity> GetByScheduleId(int id);
         void Add(ChosenActivity chosenActivity);
         void Delete(int chosenActivityId);
     }

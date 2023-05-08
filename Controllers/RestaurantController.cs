@@ -27,6 +27,12 @@ namespace ZooDays.Controllers
             return Ok(_restaurantRepository.GetById(id));
         }
 
+        [HttpGet("chosenRestaurants/{id}")]
+        public IActionResult GetByScheduleId(int id)
+        {
+            return Ok(_restaurantRepository.GetByScheduleId(id));
+        }
+
         [HttpPost]
         public IActionResult AddChosenRestaurant(ChosenRestaurant chosenRestaurant)
         {

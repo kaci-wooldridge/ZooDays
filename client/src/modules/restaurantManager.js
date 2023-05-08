@@ -24,6 +24,17 @@ export const getRestaurantById = (id) => {
     })
 };
 
+export const getChosenRestaurantsByScheduleId = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/chosenRestaurants/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => res.json());
+    })
+};
+
 export const addRestaurant = (restaurant) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {

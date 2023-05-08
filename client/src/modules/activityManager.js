@@ -24,6 +24,17 @@ export const getActivityById = (id) => {
     })
 };
 
+export const getChosenActivitiesByScheduleId = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/chosenActivities/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => res.json());
+    })
+};
+
 export const addActivity = (activity) => {
     return getToken().then((token) => {
         return fetch(baseUrl, {
