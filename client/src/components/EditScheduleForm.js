@@ -17,7 +17,14 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
     const toggle = () => setModal(!modal);
 
     const getSchedules = () => {
-        getScheduleById(id).then(setScheduleEdit)
+        getScheduleById(id)
+            .then((schedule) => {
+                const tempDate = (new Date(schedule.day))
+                console.log(schedule.day)
+                schedule.day = tempDate.getFullYear() + "-" + String(tempDate.getMonth() + 1).padStart(2, '0') + "-" + String(tempDate.getDate()).padStart(2, '0')
+                console.log(schedule.day)
+                setScheduleEdit(schedule)
+            })
     }
 
     const getAnimals = () => {
@@ -51,10 +58,16 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
         evt.preventDefault();
         editSchedule(scheduleEdit)
         if (setSchedules) {
-            getSchedulesForCurrentUser().then((schedules) => setSchedules(schedules))
+            editSchedule(scheduleEdit)
+                .then(() => {
+                    getSchedulesForCurrentUser().then((schedules) => setSchedules(schedules))
+                })
         }
         if (setSchedule) {
-            getScheduleById(id).then((scheduleEdit) => setSchedule(scheduleEdit))
+            editSchedule(scheduleEdit)
+                .then(() => {
+                    getScheduleById(id).then((scheduleEdit) => setSchedule(scheduleEdit))
+                })
         }
         toggle();
     };

@@ -7,8 +7,8 @@ import EditScheduleForm from "./EditScheduleForm";
 
 export default function ScheduleDetails() {
     const [schedule, setSchedule] = useState({});
-    const { id } = useParams();
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const getSchedules = () => {
         getScheduleById(id)

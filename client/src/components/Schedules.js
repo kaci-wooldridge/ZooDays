@@ -24,8 +24,10 @@ export default function Schedules() {
         )
         if (confirmBox === true) {
             deleteSchedule(id)
+                .then(() => {
+                    getSchedules()
+            })
         }
-        getSchedules()
     }
 
     return (
@@ -52,8 +54,12 @@ export default function Schedules() {
                     {schedules.map((schedule) => {
                         return (
                             <tr key={schedule.id} style={{ cursor: 'pointer' }}>
-                                <td onClick={() => navigate(`/schedules/${schedule.id}`)}>{schedule.name}</td>
-                                <td onClick={() => navigate(`/schedules/${schedule.id}`)}>{new Date(schedule.day).toDateString()}</td>
+                                <td onClick={() => navigate(`/schedules/${schedule.id}`)}>
+                                    {schedule.name}
+                                </td>
+                                <td onClick={() => navigate(`/schedules/${schedule.id}`)}>
+                                    {new Date(schedule.day).toDateString()}
+                                </td>
                                 <td className="text-end">
                                     <div className="schedule-buttons">
                                         <EditScheduleForm id={schedule.id} setSchedules={setSchedules} />
