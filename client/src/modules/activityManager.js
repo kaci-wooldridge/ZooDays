@@ -36,3 +36,14 @@ export const addActivity = (activity) => {
         });
     })
 };
+
+export const deleteActivity = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    })
+};

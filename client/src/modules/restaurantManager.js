@@ -36,3 +36,14 @@ export const addRestaurant = (restaurant) => {
         });
     })
 };
+
+export const deleteRestaurant = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    })
+};

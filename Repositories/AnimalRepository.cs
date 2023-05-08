@@ -1,6 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ZooDays.Models;
 using ZooDays.Utils;
 
@@ -18,6 +21,23 @@ namespace ZooDays.Repositories
                 Name = reader.GetString(reader.GetOrdinal("Name")),
                 ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
                 Description = reader.GetString(reader.GetOrdinal("Description"))
+            };
+        }
+
+        public ChosenAnimal MakeChosenAnimal(SqlDataReader reader)
+        {
+            return new ChosenAnimal()
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                AnimalId = reader.GetInt32(reader.GetOrdinal("AnimalId")),
+                ScheduleId = reader.GetInt32(reader.GetOrdinal("ScheduleId")),
+                Animal = new Animal()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("AnimalId")),
+                    Name = reader.GetString(reader.GetOrdinal("Name")),
+                    ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    Description = reader.GetString(reader.GetOrdinal("Description"))
+                }
             };
         }
 
@@ -97,24 +117,72 @@ namespace ZooDays.Repositories
             }
         }
 
-        public void Add(ChosenAnimal chosenAnimal)
+        public List<ChosenAnimal> GetByScheduleId(int id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"
-                        INSERT INTO ChosenAnimal (AnimalId, ScheduleId)
-                        OUTPUT INSERTED.ID
-                        VALUES (@AnimalId, @ScheduleId)";
-                    DbUtils.AddParameter(cmd, "@AnimalId", chosenAnimal.AnimalId);
-                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenAnimal.ScheduleId);
+                    cmd.CommandText = @"SELECT 
+                        ca.Id, ca.AnimalId, ca.ScheduleId, 
+                        a.[Name], a.ImageUrl, a.Description
+                        FROM ChosenAnimal ca
+                        LEFT JOIN Animal a ON ca.AnimalId = a.Id
+                        WHERE ca.ScheduleId = @id
+                        ORDER BY a.[Name]
+                        ";
 
-                    chosenAnimal.Id = (int)cmd.ExecuteScalar();
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    var animals = new List<ChosenAnimal>();
+                    while (reader.Read())
+                    {
+                        animals.Add(MakeChosenAnimal(reader));
+                    }
+                    reader.Close();
+                    return animals;
                 }
             }
         }
+
+        public void Add(ChosenAnimal chosenAnimal)
+        {
+            if (chosenAnimal == null)
+            {
+                throw new ArgumentNullException(nameof(chosenAnimal));
+            }
+
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                IF NOT EXISTS
+                (
+                    SELECT ca.AnimalId, ca.ScheduleId
+                    FROM ChosenAnimal ca
+                    WHERE ca.AnimalId = @AnimalId AND ca.ScheduleId = @ScheduleId
+                )
+                BEGIN
+                INSERT INTO ChosenAnimal (AnimalId, ScheduleId)
+                OUTPUT INSERTED.ID
+                VALUES (@AnimalId, @ScheduleId)
+                END";
+                    DbUtils.AddParameter(cmd, "@AnimalId", chosenAnimal.AnimalId);
+                    DbUtils.AddParameter(cmd, "@ScheduleId", chosenAnimal.ScheduleId);
+
+                    var id = cmd.ExecuteScalar();
+                    if (id != null)
+                    {
+                        chosenAnimal.Id = (int)id;
+                    }
+                }
+            }
+        }
+
 
         public void Delete(int chosenAnimalId)
         {

@@ -3,19 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Table } from 'reactstrap';
 import { editSchedule, getScheduleById } from '../modules/scheduleManager';
 import { getSchedulesForCurrentUser } from '../modules/userManager';
+import { deleteAnimal, getChosenAnimalsByScheduleId } from '../modules/animalManager';
 
 export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
     const navigate = useNavigate();
     const [scheduleEdit, setScheduleEdit] = useState({});
     const [modal, setModal] = useState(false);
+    const [animals, setAnimals] = useState([]);
+    const [activities, setActivities] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
     const toggle = () => setModal(!modal);
 
     const getSchedules = () => {
         getScheduleById(id).then(setScheduleEdit)
     }
 
+    const getAnimals = () => {
+        getChosenAnimalsByScheduleId(id).then(setAnimals);
+    }
+
     useEffect(() => {
-        getSchedules()
+        getSchedules();
+        getAnimals();
     }, []);
 
     const handleInputChange = (evt) => {
@@ -37,6 +46,12 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
         }
         toggle();
     };
+
+    const handleDeleteAnimal = (evt) => {
+        evt.preventDefault();
+        const key = evt.target.id;
+        deleteAnimal(key).then(getChosenAnimalsByScheduleId(id).then(setAnimals));
+    }
 
     return (
         <div>
@@ -61,7 +76,7 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                         </Form>
                     </div>
                     {
-                        scheduleEdit?.chosenAnimals?.length >= 1
+                        animals?.length >= 1
                             ?
                             <Table>
                                 <thead>
@@ -72,12 +87,17 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                                 </thead>
                                 <tbody>
                                     {
-                                        scheduleEdit?.chosenAnimals.map((animal) => {
+                                        animals?.map((animal) => {
                                             return (
-                                                <tr key={animal.id} style={{ cursor: 'pointer' }}>
-                                                    <td className="list-item" key={animal.id}> {animal.name}</td>
+                                                <tr key={animal.id}>
+                                                    <td className="list-item" key={animal.id}> {animal.animal.name}</td>
                                                     <td className="schedule-buttons">
-                                                        <Button className="btn-sm" outline color="danger">x</Button>
+                                                        <Button className="btn-sm" outline color="danger"
+                                                            style={{ cursor: 'pointer' }}
+                                                            id={animal.id}
+                                                            onClick={(e) => { handleDeleteAnimal(e); }}>
+                                                            x
+                                                        </Button>
                                                     </td>
                                                 </tr>
                                                     )

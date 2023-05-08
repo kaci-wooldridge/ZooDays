@@ -13,6 +13,17 @@ export const getAllAnimals = () => {
     })
 };
 
+export const getChosenAnimalsByScheduleId = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/chosenAnimals/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => res.json());
+    })
+};
+
 export const getAnimalById = (id) => {
     return getToken().then((token) => {
         return fetch(`${baseUrl}/details/${id}`, {
@@ -33,6 +44,17 @@ export const addAnimal = (animal) => {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(animal),
+        });
+    })
+};
+
+export const deleteAnimal = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         });
     })
 };
