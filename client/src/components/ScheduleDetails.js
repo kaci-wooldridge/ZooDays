@@ -41,13 +41,18 @@ export default function ScheduleDetails() {
     return (
         <div className="container mt-5">
             {loading ? (
-                <div className="spinner">
+                <div className="spinner text-center">
                     <Spinner />
                 </div>
             ) :
                 (<div className="row d-flex justify-content-center">
                     <div className="col-md-7">
                         <div className="card p-3 py-4">
+                            <div className="x-button">
+                                <Button className="back-button" size="sm" outline color="danger" onClick={() => navigate(`/schedules`)}>
+                                    x
+                                </Button>
+                            </div>
 
                             <div className="text-center">
                                 <img src={zoodays1} width="300" className="rounded-circle" />

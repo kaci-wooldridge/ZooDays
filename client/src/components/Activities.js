@@ -32,15 +32,15 @@ export default function Activities() {
                                         </div>
                                         <img
                                             width="100%"
-                                            className="animal-img img-fluid rounded shadow-lg"
+                                            className="activity-img img-fluid rounded shadow-lg"
                                             src={activity.imageUrl}
                                         />
                                         <div className="animal-txt text-center">
                                             {activity.description}
-                                        </div>
-                                        <div className="text-center">
+                                    </div>
+                                        <div className="add-button text-center">
                                             <AddActivity id={activity.id} />
-                                        </div>
+                                        </div> 
                                     </Card>
                                 </Col>
                         );

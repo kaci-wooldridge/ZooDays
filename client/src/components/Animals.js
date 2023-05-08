@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Row, Col, Card } from "reactstrap";
 import { getAllAnimals } from "../modules/animalManager";
 import AddAnimal from "./AddAnimal";
+import banner1 from "../images/banner1.png";
 
 
 export default function Animals() {
@@ -21,6 +22,13 @@ export default function Animals() {
 
     return (
         <>
+            <div className="banner-image">
+                <div className="banner-text">
+                    <h1>Our Animals</h1>
+                </div>
+                <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
+            </div>
+            
             <Row>
                 {
                     animals.map((animal) => {

@@ -51,9 +51,19 @@ padding: 10px;
 }
 
 .animal-img{
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 3/2;
   object-fit: cover;
-  min-height: 250px;
-  max-height: 350px;
+  object-position: center;
+}
+
+.activity-img{
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center;
 }
 
 .container-top {
@@ -66,7 +76,6 @@ padding: 10px;
 .schedules-header{
   font-size: 50px;
   font-weight: 700;
-
 }
 
 .buttons {
@@ -87,6 +96,51 @@ padding: 10px;
   margin-left: 5px;
 }
 
+.x-button{
+  display: flex;
+  justify-content: end;
+}
+
 .schedule-table{
   margin: 30px;
+}
+
+
+.banner-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-wolf6.jpg');
+
+  /* Set a specific height */
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom:50px;
+}
+
+/* Place text in the middle of the image */
+.banner-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.banner-bottom{
+  max-inline-size: 100%;
+  min-width: 100%;
+  text-align: center;
+  position: relative;
+  top: 92%;
+  block-size: auto;
+  object-fit: cover;
+  object-position: center;
 }
