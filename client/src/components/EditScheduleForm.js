@@ -20,9 +20,7 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
         getScheduleById(id)
             .then((schedule) => {
                 const tempDate = (new Date(schedule.day))
-                console.log(schedule.day)
                 schedule.day = tempDate.getFullYear() + "-" + String(tempDate.getMonth() + 1).padStart(2, '0') + "-" + String(tempDate.getDate()).padStart(2, '0')
-                console.log(schedule.day)
                 setScheduleEdit(schedule)
             })
     }
