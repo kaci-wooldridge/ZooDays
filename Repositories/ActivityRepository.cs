@@ -49,7 +49,8 @@ namespace ZooDays.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT a.id, a.Name, a.Time, a.ImageUrl, a.Description
-                        FROM Activity a";
+                        FROM Activity a
+                        ORDER BY a.Time";
                     var reader = cmd.ExecuteReader();
 
                     var activities = new List<Activity>();

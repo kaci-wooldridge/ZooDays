@@ -53,6 +53,14 @@ margin-bottom: 40px;
 
 .animal-card{
   margin: 5px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .7);
+  display: flex;
+}
+
+.card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .animal-img{
@@ -63,12 +71,22 @@ margin-bottom: 40px;
   object-position: center;
 }
 
+.animal-txt{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .activity-img{
   max-inline-size: 100%;
   block-size: auto;
-  aspect-ratio: 1/1;
+  aspect-ratio: 2/2;
   object-fit: cover;
   object-position: center;
+}
+
+.activity-time{
+  font-weight: 500;
 }
 
 .container-top {
@@ -116,7 +134,6 @@ margin-bottom: 40px;
 .schedule-table{
   margin: 30px;
 }
-
 
 .banner-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-wolf6.jpg');

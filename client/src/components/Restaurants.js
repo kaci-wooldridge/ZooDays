@@ -38,14 +38,16 @@ export default function Restaurants() {
                                     </div>
                                     <img
                                         width="100%"
-                                        className="animal-img img-fluid rounded shadow-lg"
+                                        className="animal-img img-fluid shadow-lg"
                                         src={restaurant.imageUrl}
                                     />
-                                    <div className="animal-txt text-center">
-                                        {restaurant.cost}
-                                    </div>
-                                    <div className="text-center">
-                                        <AddRestaurant id={restaurant.id} />
+                                    <div className="card-body">
+                                        <div className="animal-txt text-center">
+                                            {restaurant.cost}
+                                        </div>
+                                        <div className="text-center">
+                                            <AddRestaurant id={restaurant.id} />
+                                        </div>
                                     </div>
                                 </Card>
                             </Col>

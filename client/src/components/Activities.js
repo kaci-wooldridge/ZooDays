@@ -31,24 +31,29 @@ export default function Activities() {
                 {
                     activities.map((activity) => {
                         return (
-                                <Col className="fluid animal-container" xs="4" key={activity.id}>
-                                    <Card className="img-fluid border-1 shadow-sm animal-card" key={activity.id} style={{ height: '100%' }}>
-                                        <div className="text-center card-top">
-                                            {activity.name}
+                            <Col className="fluid animal-container" xs="4" key={activity.id}>
+                                <Card className="img-fluid border-1 shadow-sm animal-card" key={activity.id} style={{ height: '100%' }}>
+                                    <div className="text-center card-top">
+                                        {activity.name}
+                                    </div>
+                                    <img
+                                        width="100%"
+                                        className="activity-img img-fluid shadow-lg"
+                                        src={activity.imageUrl}
+                                    />
+                                    <div className="card-body">
+                                        <div className="activity-time text-center">
+                                            {new Date(activity.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}
                                         </div>
-                                        <img
-                                            width="100%"
-                                            className="activity-img img-fluid rounded shadow-lg"
-                                            src={activity.imageUrl}
-                                        />
                                         <div className="animal-txt text-center">
                                             {activity.description}
-                                    </div>
+                                        </div>
                                         <div className="add-button text-center">
                                             <AddActivity id={activity.id} />
-                                        </div> 
-                                    </Card>
-                                </Col>
+                                        </div>
+                                    </div>
+                                </Card>
+                            </Col>
                         );
                     })
                 }
