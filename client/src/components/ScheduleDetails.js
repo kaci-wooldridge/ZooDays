@@ -40,7 +40,7 @@ export default function ScheduleDetails() {
     }
 
     return (
-        <>
+        <div className="schedule-details-page">
             <div className="banner-image-5">
                 <div className="banner-text">
                     <h1>{schedule?.name}</h1>
@@ -174,7 +174,7 @@ export default function ScheduleDetails() {
 
                     )}
             </div >
-        </>
+        </div>
     );
 }
 
