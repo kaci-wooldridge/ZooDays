@@ -39,115 +39,122 @@ export default function ScheduleDetails() {
     }
 
     return (
-        <div className="container mt-5">
-            {loading ? (
-                <div className="spinner text-center">
-                    <Spinner />
+        <>
+            <div className="banner-image-5">
+                <div className="banner-text">
+                    <h1>{schedule?.name}</h1>
                 </div>
-            ) :
-                (<div className="row d-flex justify-content-center">
-                    <div className="col-md-7">
-                        <div className="card p-3 py-4">
-                            <div className="x-button">
-                                <Button className="back-button" size="sm" outline color="danger" onClick={() => navigate(`/schedules`)}>
-                                    x
-                                </Button>
-                            </div>
+                <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
+            </div>
+            <div className="container">
+                {loading ? (
+                    <div className="spinner text-center">
+                        <Spinner />
+                    </div>
+                ) :
+                    (
 
-                            <div className="text-center">
-                                <img src={zoodays1} width="300" className="rounded-circle" />
-                            </div>
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-md-7">
+                                <div className="card p-3 py-4">
+                                    <div className="x-button">
+                                        <Button className="back-button" size="sm" outline color="danger" onClick={() => navigate(`/schedules`)}>
+                                            x
+                                        </Button>
+                                    </div>
 
-                            <div className="text-center mt-3">
-                                <h5 className="mt-2 mb-0">{schedule?.name}</h5>
-                                <span>Day of Visit: {new Date(schedule?.day).toDateString()}</span>
+                                    <div className="text-center">
+                                        <div className="date-container">Day of Visit: {new Date(schedule?.day).toDateString()}</div>
 
-                                <div className="px-4 mt-1">
-                                    <p className="fonts">{}</p>
+                                        <div className="px-4 mt-1">
+                                            <p className="fonts">{ }</p>
+                                        </div>
+
+                                        <div className="chosen-table">
+                                            <Table>
+                                                <thead>
+                                                    <tr>
+                                                        {
+                                                            schedule?.chosenAnimals?.length != 0
+                                                                ?
+                                                                <th>Animals to See</th>
+                                                                :
+                                                                ""
+                                                        }
+                                                        {
+                                                            schedule?.chosenActivities?.length != 0
+                                                                ?
+                                                                <th>Activities to do</th>
+                                                                :
+                                                                ""
+                                                        }
+                                                        {
+                                                            schedule?.chosenRestaurants?.length != 0
+                                                                ?
+                                                                <th>Restaurants to Visit</th>
+                                                                :
+                                                                ""
+                                                        }
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        {
+                                                            schedule?.chosenAnimals?.length >= 1
+                                                                ?
+                                                                <td>
+                                                                    {
+                                                                        schedule.chosenAnimals.map((animal) => {
+                                                                            return (<div className="list-item" key={animal.id}> {animal?.name} </div>)
+                                                                        })}
+                                                                </td>
+                                                                :
+                                                                ""
+                                                        }
+                                                        {
+                                                            schedule?.chosenActivities?.length >= 1
+                                                                ?
+                                                                <td>
+                                                                    {
+                                                                        schedule.chosenActivities.map((activity) => {
+                                                                            return (<div key={activity.id} className="list-item"> {activity?.name} </div>)
+                                                                        })}
+                                                                </td>
+                                                                :
+                                                                ""
+                                                        }
+                                                        {
+                                                            schedule?.chosenRestaurants?.length >= 1
+                                                                ?
+                                                                <td>
+                                                                    {
+                                                                        schedule.chosenRestaurants.map((restaurant) => {
+                                                                            return (<div key={restaurant.id} className="list-item"> {restaurant?.name} </div>)
+                                                                        })}
+                                                                </td>
+                                                                :
+                                                                ""
+                                                        }
+                                                    </tr>
+                                                </tbody>
+                                            </Table>
+                                        </div>
+                                        <div className="schedule-buttons2">
+                                            <EditScheduleForm id={id} setSchedule={setSchedule} />
+
+                                            <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
+                                                Delete
+                                            </Button>
+                                        </ div>
+
+                                    </div>
                                 </div>
-
-                                <div className="chosen-table">
-                                    <Table>
-                                        <thead>
-                                            <tr>
-                                                {
-                                                    schedule?.chosenAnimals?.length != 0
-                                                        ?
-                                                        <th>Animals to See</th>
-                                                        :
-                                                        ""
-                                                }
-                                                {
-                                                    schedule?.chosenActivities?.length != 0
-                                                        ?
-                                                        <th>Activities to do</th>
-                                                        :
-                                                        ""
-                                                }
-                                                {
-                                                    schedule?.chosenRestaurants?.length != 0
-                                                        ?
-                                                        <th>Restaurants to Visit</th>
-                                                        :
-                                                        ""
-                                                }
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            {
-                                                schedule?.chosenAnimals?.length >= 1
-                                                    ?
-                                                    <td>
-                                                        {
-                                                            schedule.chosenAnimals.map((animal) => {
-                                                                return (<div className="list-item" key={animal.id}> {animal?.name} </div>)
-                                                            })}
-                                                    </td>
-                                                    :
-                                                    ""
-                                            }
-                                            {
-                                                schedule?.chosenActivities?.length >= 1
-                                                    ?
-                                                    <td>
-                                                        {
-                                                            schedule.chosenActivities.map((activity) => {
-                                                                return (<div key={activity.id} className="list-item"> {activity?.name} </div>)
-                                                            })}
-                                                    </td>
-                                                    :
-                                                    ""
-                                            }
-                                            {
-                                                schedule?.chosenRestaurants?.length >= 1
-                                                    ?
-                                                    <td>
-                                                        {
-                                                            schedule.chosenRestaurants.map((restaurant) => {
-                                                                return (<div key={restaurant.id} className="list-item"> {restaurant?.name} </div>)
-                                                            })}
-                                                    </td>
-                                                    :
-                                                    ""
-                                                }
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </div>
-                                <div className="schedule-buttons2">
-                                    <EditScheduleForm id={id} setSchedule={setSchedule} />
-
-                                    <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
-                                        Delete
-                                    </Button>
-                                </ div>
-
                             </div>
                         </div>
-                    </div>
-                </div>)}
-            </div>
+
+                    )}
+            </div >
+        </>
     );
 }
 

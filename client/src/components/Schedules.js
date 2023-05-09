@@ -32,13 +32,14 @@ export default function Schedules() {
 
     return (
         <>
-            <div className="container-top">
-                <div className="schedules-header">
-                    Schedules
+            <div className="banner-image-4">
+                <div className="banner-text">
+                    <h1>Your Schedules</h1>
                 </div>
-                <div className="new-button">
-                    <NewSchedule setSchedules={setSchedules} />
-                </div>
+                <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
+            </div>
+            <div className="new-button">
+                <NewSchedule setSchedules={setSchedules} />
             </div>
 
             <div className="schedule-table">

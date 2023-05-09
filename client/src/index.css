@@ -23,6 +23,7 @@ code {
 .nav-items{
   font-weight: 700;
   float: right;
+  font-size: larger;
 }
 
 .nav-item{
@@ -73,7 +74,14 @@ margin-bottom: 40px;
 .container-top {
   display: flex;
   margin: 30px;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-button{
+  display: flex;
+  margin: 30px;
+  justify-content: center;
   align-items: center;
 }
 
@@ -111,11 +119,7 @@ margin-bottom: 40px;
 
 
 .banner-image {
-  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-wolf6.jpg');
-
-  /* Set a specific height */
-  /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -160,11 +164,7 @@ margin-bottom: 40px;
 }
 
 .banner-image2 {
-  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-tiger.jpg');
-
-  /* Set a specific height */
-  /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -179,11 +179,52 @@ margin-bottom: 40px;
 }
 
 .banner-image3 {
-  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-bear.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom: 100px;
+  z-index: -1;
+}
 
-  /* Set a specific height */
-  /* Position and center the image to scale nicely on all screens */
+.banner-image-4 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-cheetah3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom: 100px;
+  z-index: -1;
+}
+
+.banner-image-5 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-elephant.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom: 100px;
+  z-index: -1;
+}
+
+.banner-image-home {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-zebra.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -199,7 +240,7 @@ margin-bottom: 40px;
 
 .logo-img{
   border: 2px solid black;
-  width: 150px;
+  width: 140px;
   height: auto;
   position: absolute;
   top: .5em;
@@ -207,4 +248,10 @@ margin-bottom: 40px;
   display: inline;
   z-index: 5;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .7);
+}
+
+.date-container{
+  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: large;
 }
