@@ -29,19 +29,19 @@ export default function Header({ isLoggedIn, user }) {
             <NavbarToggler onClick={toggleNavbar} className="me-2" />
                     <Collapse isOpen={!collapsed} navbar>
               <Nav className="ms-auto nav-items" navbar>
-                            <NavItem>
-                                <NavLink href="/schedules">Your Schedules</NavLink>
-                            </NavItem>
-                            <NavItem>
+                <NavItem className="nav-item">
                                 <NavLink href="/animals">Animals</NavLink>
                             </NavItem>
-                            <NavItem>
+                <NavItem className="nav-item">
                                 <NavLink href="/activities">Activities</NavLink>
                             </NavItem>
-                            <NavItem>
+                <NavItem className="nav-item">
                                 <NavLink href="/restaurants">Restaurants</NavLink>
-                            </NavItem>
-                            <NavItem>
+                </NavItem>
+                <NavItem className="nav-item">
+                  <NavLink href="/schedules">Your Schedules</NavLink>
+                </NavItem>
+                <NavItem className="nav-item">
                                 <NavLink onClick={logout} href="/login">Logout</NavLink>
                             </NavItem>
                         </Nav>

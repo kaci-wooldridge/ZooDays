@@ -33,7 +33,7 @@ export default function Activities() {
                         return (
                                 <Col className="fluid animal-container" xs="4" key={activity.id}>
                                     <Card className="img-fluid border-1 shadow-sm animal-card" key={activity.id} style={{ height: '100%' }}>
-                                        <div className="text-center">
+                                        <div className="text-center card-top">
                                             {activity.name}
                                         </div>
                                         <img

@@ -33,7 +33,7 @@ export default function Restaurants() {
                         return (
                             <Col key={restaurant.id} className="fluid animal-container" xs="4">
                                 <Card className="img-fluid border-1 shadow-sm animal-card" style={{ height: '100%' }}>
-                                    <div className="text-center" >
+                                    <div className="text-center card-top" >
                                         {restaurant.name}
                                     </div>
                                     <img
