@@ -141,8 +141,10 @@ namespace ZooDays.Repositories
                         cAnimal.id AS chosenAnimalId, cAnimal.AnimalId AS animalId,
                         Animal.[Name] AS animalName,
 
-                        cActivity.id AS chosenActivityId, cActivity.ActivityId AS activityId, 
+                        cActivity.id AS chosenActivityId, cActivity.ActivityId AS activityId,
                         Activity.[Name] AS activityName,
+
+                        Activity.Time AS activityTime,
 
                         cRestaurant.id AS chosenRestaurantId, cRestaurant.RestaurantId AS restaurantId,
                         Restaurant.[Name] AS restaurantName
@@ -194,7 +196,8 @@ namespace ZooDays.Repositories
                                 schedule.ChosenActivities.Add(new Activity()
                                 {
                                     Id = reader.GetInt32(reader.GetOrdinal("activityId")),
-                                    Name = reader.GetString(reader.GetOrdinal("activityName"))
+                                    Name = reader.GetString(reader.GetOrdinal("activityName")),
+                                    Time = reader.GetDateTime(reader.GetOrdinal("activityTime"))
                                 });
                             }
                         }

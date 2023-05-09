@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteSchedule, getScheduleById } from "../modules/scheduleManager";
-import zoodays1 from "../images/zoodays1.png";
 import { Button, Spinner, Table } from "reactstrap";
 import EditScheduleForm from "./EditScheduleForm";
+import { getAllActivities } from "../modules/activityManager";
 
 export default function ScheduleDetails() {
     const [schedule, setSchedule] = useState({});
+    const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -46,7 +47,7 @@ export default function ScheduleDetails() {
                 </div>
                 <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
             </div>
-            <div className="container">
+            <div className="details-container">
                 {loading ? (
                     <div className="spinner text-center">
                         <Spinner />
@@ -54,9 +55,9 @@ export default function ScheduleDetails() {
                 ) :
                     (
 
-                        <div className="row d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center details-card">
                             <div className="col-md-7">
-                                <div className="card p-3 py-4">
+                                <div className="card p-3 py-4 schedule-details-card">
                                     <div className="x-button">
                                         <Button className="back-button" size="sm" outline color="danger" onClick={() => navigate(`/schedules`)}>
                                             x
@@ -64,15 +65,19 @@ export default function ScheduleDetails() {
                                     </div>
 
                                     <div className="text-center">
-                                        <div className="date-container">Day of Visit: {new Date(schedule?.day).toDateString()}</div>
+                                        <div className="date-container">Day of Visit:
+                                            <div className="schedule-details-date-text">
+                                                {new Date(schedule?.day).toDateString()}
+                                            </div>
+                                        </div>
 
                                         <div className="px-4 mt-1">
                                             <p className="fonts">{ }</p>
                                         </div>
 
-                                        <div className="chosen-table">
-                                            <Table>
-                                                <thead>
+                                        <div>
+                                            <Table className="chosen-table">
+                                                <thead className="table-elements">
                                                     <tr>
                                                         {
                                                             schedule?.chosenAnimals?.length != 0
@@ -116,9 +121,24 @@ export default function ScheduleDetails() {
                                                                 ?
                                                                 <td>
                                                                     {
-                                                                        schedule.chosenActivities.map((activity) => {
-                                                                            return (<div key={activity.id} className="list-item"> {activity?.name} </div>)
-                                                                        })}
+                                                                        schedule.chosenActivities
+                                                                            .sort((a, b) => new Date(a.time) - new Date(b.time))
+                                                                            .map((activity) => {
+                                                                                return (
+                                                                                    <>
+                                                                                        <div key={activity.id}
+                                                                                            className="list-item schedule-details-activity-name"
+                                                                                            style={{ cursor: 'pointer' }}
+                                                                                        >
+                                                                                            {activity?.name}
+                                                                                        </div>
+                                                                                        <div className="time-hidden">
+                                                                                            {new Date(activity.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}
+                                                                                        </div>
+                                                                                    </>
+                                                                                )
+                                                                            })
+                                                                    }
                                                                 </td>
                                                                 :
                                                                 ""
