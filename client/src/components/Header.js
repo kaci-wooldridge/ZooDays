@@ -18,16 +18,17 @@ export default function Header({ isLoggedIn, user }) {
 
     return (
         <div>
-            <Navbar className="nav-bar">
+        <Navbar className="nav-bar" expand="md">
                 {isLoggedIn &&
-                    <>
-                    <NavbarBrand href="/" className="me-auto">
-                    ZooDays
-                    </NavbarBrand>
+            <>
+              <NavbarBrand href="/" className="img">
+                <img className="logo-img" src={require('../images/logo3.jpg')} />
+              </NavbarBrand>
 
-                    <NavbarToggler onClick={toggleNavbar} className="me-2" />
+
+            <NavbarToggler onClick={toggleNavbar} className="me-2" />
                     <Collapse isOpen={!collapsed} navbar>
-                        <Nav className="nav-items" navbar>
+              <Nav className="ms-auto nav-items" navbar>
                             <NavItem>
                                 <NavLink href="/schedules">Your Schedules</NavLink>
                             </NavItem>
@@ -50,9 +51,9 @@ export default function Header({ isLoggedIn, user }) {
                 }
                 {!isLoggedIn &&
                     <>
-                    <NavbarBrand href="/" className="me-auto">
-                        ZooDays
-                    </NavbarBrand>
+              <NavbarBrand href="/" className="img">
+                <img src={require('../images/logo3.jpg')} />
+              </NavbarBrand>
                     </>
                 }
             </Navbar>

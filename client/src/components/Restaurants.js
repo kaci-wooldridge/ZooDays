@@ -21,6 +21,12 @@ export default function Restaurants() {
 
     return (
         <>
+            <div className="banner-image3">
+                <div className="banner-text">
+                    <h1>Restaurants</h1>
+                </div>
+                <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
+            </div>
             <Row>
                 {
                     restaurants.map((restaurant) => {

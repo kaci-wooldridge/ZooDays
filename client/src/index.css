@@ -17,13 +17,12 @@ code {
   background: -webkit-linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
   background: linear-gradient(to right, rgba(196, 113, 245, 1), rgba(250, 113, 205, 1));
   backdrop-filter: blur(50px);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
 }
 
 .nav-items{
-  text-align: end;
-  margin-right: 12px;
-
+  font-weight: 500;
+  float: right;
 }
 
 .navbar {
@@ -123,6 +122,7 @@ margin-bottom: 40px;
   object-fit: cover;
   object-position: top center;
   margin-bottom:100px;
+  z-index: -1;
 }
 
 .banner-text {
@@ -152,4 +152,54 @@ margin-bottom: 40px;
     backdrop-filter: blur(50px);
   font-size: 25px;
   font-weight: 900;
+}
+
+.banner-image2 {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-tiger.jpg');
+
+  /* Set a specific height */
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom: 100px;
+  z-index: -1;
+}
+
+.banner-image3 {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-bear.png');
+
+  /* Set a specific height */
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 8.5/2;
+  object-fit: cover;
+  object-position: top center;
+  margin-bottom: 100px;
+  z-index: -1;
+}
+
+.logo-img{
+  border: 2px solid black;
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: .5em;
+  left: 1em;
+  display: inline;
+  z-index: 5;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
 }
