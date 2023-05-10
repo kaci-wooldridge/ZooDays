@@ -32,7 +32,7 @@ export default function Restaurants() {
                     restaurants.map((restaurant) => {
                         return (
                             <Col key={restaurant.id} className="fluid animal-container" xs="4">
-                                <Card className="img-fluid border-1 shadow-sm animal-card" style={{ height: '100%' }}>
+                                <Card className="img-fluid border-1 animal-card" style={{ height: '100%' }}>
                                     <div className="text-center card-top" >
                                         {restaurant.name}
                                     </div>

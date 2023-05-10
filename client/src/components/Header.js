@@ -52,7 +52,7 @@ export default function Header({ isLoggedIn, user }) {
                 {!isLoggedIn &&
                     <>
               <NavbarBrand href="/" className="img">
-                <img src={require('../images/logo3.jpg')} />
+              <img src={require('../images/logo3.jpg')} className="logo-img" />
               </NavbarBrand>
                     </>
                 }

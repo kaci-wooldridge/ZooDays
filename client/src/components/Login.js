@@ -17,7 +17,7 @@ export default function Login() {
     };
 
     return (
-        <Form onSubmit={loginSubmit}>
+        <Form onSubmit={loginSubmit} className="login-page">
             <fieldset>
                 <FormGroup>
                     <Label for="email">Email</Label>
@@ -40,7 +40,7 @@ export default function Login() {
                     <Button>Login</Button>
                 </FormGroup>
                 <em>
-                    Not registered? <Link to="register">Register</Link>
+                    Not registered? <Link to="../register">Register</Link>
                 </em>
             </fieldset>
         </Form>
