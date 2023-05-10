@@ -3,11 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteSchedule, getScheduleById } from "../modules/scheduleManager";
 import { Button, Spinner, Table } from "reactstrap";
 import EditScheduleForm from "./EditScheduleForm";
-import { getAllActivities } from "../modules/activityManager";
 
 export default function ScheduleDetails() {
     const [schedule, setSchedule] = useState({});
-    const [activities, setActivities] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const { id } = useParams();

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Row, Col, Card, CardHeader, CardFooter } from "reactstrap";
+import { Row, Col, Card } from "reactstrap";
 import { getAllAnimals } from "../modules/animalManager";
 import AddAnimal from "./AddAnimal";
-import banner1 from "../images/banner1.png";
+import Map from "./Map";
 
 
 export default function Animals() {
@@ -28,6 +28,7 @@ export default function Animals() {
                 </div>
                 <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
             </div>
+            <div className="zoo-map text-center"><Map /></div>
 
             <Row>
                 {

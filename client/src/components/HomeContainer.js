@@ -1,12 +1,12 @@
 import React from "react";
-import PictureCarousel from "./PictureCarousel";
+import HomeTop from "./HomeTop";
 
 export default function Home() {
     return (
         <div className="home-container">
             <div className="home-page">
                 <div className="picture-carousel">
-                    <PictureCarousel />
+                    <HomeTop />
                 </div>
             </div>
         </div>

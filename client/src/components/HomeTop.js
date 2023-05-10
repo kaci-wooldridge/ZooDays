@@ -6,10 +6,9 @@ const pictures = [
     "https://images.ctfassets.net/pjshm78m9jt4/4Oi8IubmZNrNqS2vgfq1v7/aa305137d8a03a646ae6511e3713ca0e/B_Margaret_the_giraffe_calf_takes_first_steps_outside_at_ZSL_Whipsnade_Zoo_c_ZSL.jpg"
 ]
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28"];
 const delay = 4000;
 
-export default function PictureCarousel() {
+export default function HomeTop() {
     const [index, setIndex] = React.useState(0);
     const timeoutRef = React.useRef(null);
 
@@ -53,18 +52,6 @@ export default function PictureCarousel() {
                 <div className="open-today">Open Today</div>
                 <div className="time-open">9:30am - 5:00pm</div>
             </div>
-
-            {/* <div className="slideshowDots">
-                {colors.map((_, idx) => (
-                    <div
-                        key={idx}
-                        className={`slideshowDot${index === idx ? " active" : ""}`}
-                        onClick={() => {
-                            setIndex(idx);
-                        }}
-                    ></div>
-                ))}
-            </div> */}
         </div>
     );
 }

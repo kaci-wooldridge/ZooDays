@@ -42,7 +42,47 @@ export default function Schedules() {
                 <NewSchedule setSchedules={setSchedules} />
             </div>
 
-            <div className="schedule-table">
+            {
+                schedules.length === 0 ? (
+                    <div className="no-schedules-message">""</div>
+                ) : (
+                    <div className="schedule-table">
+                        <Table hover>
+                            <thead>
+                                <tr>
+                                    <th>Schedule Name</th>
+                                    <th>Day of Visit</th>
+                                    <th> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {schedules.sort((a, b) => new Date(a.day) - new Date(b.day)).map((schedule) => {
+                                    return (
+                                        <tr key={schedule.id} style={{ cursor: 'pointer' }}>
+                                            <td onClick={() => navigate(`/schedules/${schedule.id}`)}>
+                                                {schedule.name}
+                                            </td>
+                                            <td onClick={() => navigate(`/schedules/${schedule.id}`)}>
+                                                {new Date(schedule.day).toDateString()}
+                                            </td>
+                                            <td className="text-end">
+                                                <div className="schedule-buttons">
+                                                    <EditScheduleForm id={schedule.id} setSchedules={setSchedules} />
+                                                    <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
+                                                        Delete
+                                                    </Button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                    </div>
+                )
+            }
+
+            {/* <div className="schedule-table">
             <Table hover>
                 <thead>
                     <tr>
@@ -75,7 +115,7 @@ export default function Schedules() {
                         })}
                 </tbody>
                 </Table>
-            </div>
+            </div> */}
         </div>
     )
 }
