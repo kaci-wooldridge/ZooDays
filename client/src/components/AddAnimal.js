@@ -52,6 +52,10 @@ export default function AddAnimal({direction, id}) {
         toggle();
     };
 
+    if (schedules.length === 0) {
+        return null;
+    }
+
     return (
         <div>
             <Button outline color="success" onClick={toggle}>+</Button>

@@ -39,7 +39,7 @@ export default function Header({ isLoggedIn, user }) {
                                 <NavLink href="/restaurants">Restaurants</NavLink>
                 </NavItem>
                 <NavItem className="nav-item">
-                  <NavLink href="/schedules">Your Schedules</NavLink>
+                  <NavLink href="/schedules">Plan Your Visit</NavLink>
                 </NavItem>
                 <NavItem className="nav-item">
                                 <NavLink onClick={logout} href="/login">Logout</NavLink>

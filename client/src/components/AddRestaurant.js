@@ -49,6 +49,10 @@ export default function AddRestaurant({ direction, id }) {
         toggle();
     };
 
+    if (schedules.length === 0) {
+        return null;
+    }
+
     return (
         <div>
             <Button outline color="success" onClick={toggle}>+</Button>

@@ -34,7 +34,7 @@ export default function Schedules() {
         <>
             <div className="banner-image-4">
                 <div className="banner-text">
-                    <h1>Your Schedules</h1>
+                    <h1>Plan Your Visit</h1>
                 </div>
                 <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
             </div>

@@ -52,47 +52,51 @@ export default function AddActivity({ direction, id }) {
         toggle();
     };
 
-    return (
-        <div>
-            <Button outline color="success" onClick={toggle}>+</Button>
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Which schedule would you like to add this activity to?</ModalHeader>
-                <ModalBody>
-                    <div className="p-5 text-center">
-                        <Dropdown isOpen={dropdownOpen} toggle={toggle2} direction={direction}>
-                            <DropdownToggle caret>{dropdownText}</DropdownToggle>
-                            <DropdownMenu>
-                                {schedules.map((schedule) => {
-                                    return (
-                                        <DropdownItem
-                                            key={schedule.id}
-                                            id="scheduleId"
-                                            value={schedule.id}
-                                            name={schedule.name}
-                                            onClick={(e) => {
-                                                handleDropdownText(e);
-                                                handleInputChange(e);
-                                            }}>
-                                            {schedule?.name}
-                                        </DropdownItem>
-                                    )
-                                })}
-                            </DropdownMenu>
-                        </Dropdown>
-                    </div>
+    if (schedules.length === 0) {
+        return null;
+    }
 
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="success"
-                        onClick={(e) => { handleSave(e); }}>
-                        Save
-                    </Button>{' '}
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
-        </div>
+    return (
+            <div>
+                <Button outline color="success" onClick={toggle}>+</Button>
+                <Modal isOpen={modal} toggle={toggle}>
+                    <ModalHeader toggle={toggle}>Which schedule would you like to add this activity to?</ModalHeader>
+                    <ModalBody>
+                        <div className="p-5 text-center">
+                            <Dropdown isOpen={dropdownOpen} toggle={toggle2} direction={direction}>
+                                <DropdownToggle caret>{dropdownText}</DropdownToggle>
+                                <DropdownMenu>
+                                    {schedules.map((schedule) => {
+                                        return (
+                                            <DropdownItem
+                                                key={schedule.id}
+                                                id="scheduleId"
+                                                value={schedule.id}
+                                                name={schedule.name}
+                                                onClick={(e) => {
+                                                    handleDropdownText(e);
+                                                    handleInputChange(e);
+                                                }}>
+                                                {schedule?.name}
+                                            </DropdownItem>
+                                        )
+                                    })}
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="success"
+                            onClick={(e) => { handleSave(e); }}>
+                            Save
+                        </Button>{' '}
+                        <Button color="secondary" onClick={toggle}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
     );
 }
 
