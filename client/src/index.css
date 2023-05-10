@@ -260,18 +260,16 @@ code {
   z-index: -1;
 }
 
-.banner-image-home {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-zebra.jpg');
+.home-page {
+  background-image: url("https://prod.speakcdn.com/sitefiles/2147/images/cheeta-pattern.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  max-inline-size: 100%;
   block-size: auto;
-  aspect-ratio: 8.5/2;
+  aspect-ratio: 2/1;
   object-fit: cover;
   object-position: top center;
-  margin-bottom: 100px;
   z-index: -1;
 }
 
@@ -285,6 +283,18 @@ code {
   display: inline;
   z-index: 5;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .7);
+}
+
+.hours-container{
+  color:#fefeff;
+  background-color: #553e60;
+  max-width: 1300px;
+  height: 100px;
+  margin-top:30px;
+  border-radius: 40px;
+  font-size: larger;
+  font-weight: 700;
+  padding: 10px;
 }
 
 .date-container {
@@ -323,4 +333,33 @@ code {
   margin-top: 200px;
   margin-left: 20px;
   margin-right: 20px;
+}
+
+/* Slideshow */
+
+.picture-carousel{
+  position: relative;
+  z-index: -1;
+}
+
+.slideshow {
+  padding-top: 30px;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 1300px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  position: relative;
+  max-height: 670px;
+  width: 100%;
+  border-radius: 40px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position:top center;
 }
