@@ -31,7 +31,7 @@ export default function Schedules() {
     }
 
     return (
-        <>
+        <div className="schedules-container">
             <div className="banner-image-4">
                 <div className="banner-text">
                     <h1>Plan Your Visit</h1>
@@ -76,6 +76,6 @@ export default function Schedules() {
                 </tbody>
                 </Table>
             </div>
-        </>
+        </div>
     )
 }

@@ -5,6 +5,7 @@ import ApplicationViews from './components/ApplicationViews';
 import { useEffect, useState } from 'react';
 import { me, onLoginStatusChange } from './modules/authManager';
 import { Spinner } from 'reactstrap';
+import Footer from './components/Footer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -30,6 +31,7 @@ function App() {
     <BrowserRouter>
       <Header isLoggedIn={isLoggedIn} user={user} />
       <ApplicationViews isLoggedIn={isLoggedIn} user={user} />
+      <Footer />
     </BrowserRouter>
   );
 }

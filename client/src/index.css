@@ -1,4 +1,5 @@
 body {
+  
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -18,6 +19,14 @@ code {
   background: linear-gradient(to right, rgb(159, 123, 173, 1), rgb(254, 254, 255, 1));
   backdrop-filter: blur(50px);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+}
+
+.footer{
+  text-align: center;
+  background: #553e60;
+  background: -webkit-linear-gradient(to right, rgb(159, 123, 173, 1), rgb(254, 254, 255, 1));
+  background: linear-gradient(to right, rgb(159, 123, 173, 1), rgb(254, 254, 255, 1));
+  backdrop-filter: blur(50px);
 }
 
 .nav-items {
@@ -155,6 +164,10 @@ code {
   margin: 30px;
 }
 
+.schedules-container, .schedule-details-page{
+  min-height: 100vh;
+}
+
 .banner-image {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/banner-wolf6.jpg');
   background-position: center;
@@ -260,17 +273,14 @@ code {
   z-index: -1;
 }
 
-.home-page {
+.home-container{
   background-image: url("https://prod.speakcdn.com/sitefiles/2147/images/cheeta-pattern.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
   position: relative;
-  block-size: auto;
-  aspect-ratio: 2/1;
-  object-fit: cover;
-  object-position: top center;
-  z-index: -1;
+  z-index: -4;
 }
 
 .logo-img {
