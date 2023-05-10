@@ -17,11 +17,6 @@ export default function Map() {
                 <ModalBody className="text-center">
                     <img src={zoodaysMap} width="700" alt="ZooDays Map" />
                 </ModalBody>
-                <ModalFooter>
-                    <Button color="secondary" onClick={toggle}>
-                        Close
-                    </Button>
-                </ModalFooter>
             </Modal>
         </div>
     );

@@ -61,6 +61,7 @@ export default function Register() {
                 </FormGroup>
                 <FormGroup>
                     <Button>Register</Button>
+                    <Button href="/login" className="cancel-button">Cancel</Button>
                 </FormGroup>
             </fieldset>
         </Form>

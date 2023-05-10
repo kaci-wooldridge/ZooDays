@@ -103,6 +103,7 @@ code {
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
+  margin-bottom:100px;
 }
 
 .details-container {
@@ -148,7 +149,7 @@ code {
   margin-right: 8px;
 }
 
-.del-button {
+.del-button, .cancel-button {
   margin-left: 5px;
 }
 
@@ -161,7 +162,7 @@ code {
   margin: 30px;
 }
 
-.schedules-container, .schedule-details-page{
+.schedules-container, .schedule-details-page, .login-page{
   min-height: 100vh;
 }
 
