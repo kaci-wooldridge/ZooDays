@@ -60,7 +60,7 @@ export default function AddActivity({ direction, id }) {
             <div>
                 <Button outline color="success" onClick={toggle}>+</Button>
                 <Modal isOpen={modal} toggle={toggle}>
-                    <ModalHeader toggle={toggle}>Which schedule would you like to add this activity to?</ModalHeader>
+                <ModalHeader className="text-center" toggle={toggle}>Which schedule would you like to add this activity to?</ModalHeader>
                     <ModalBody>
                         <div className="p-5 text-center">
                             <Dropdown isOpen={dropdownOpen} toggle={toggle2} direction={direction}>

@@ -4,6 +4,7 @@ import { deleteSchedule, getScheduleById } from "../modules/scheduleManager";
 import { Button, Spinner, Table } from "reactstrap";
 import EditScheduleForm from "./EditScheduleForm";
 
+
 export default function ScheduleDetails() {
     const [schedule, setSchedule] = useState({});
     const [loading, setLoading] = useState(true);

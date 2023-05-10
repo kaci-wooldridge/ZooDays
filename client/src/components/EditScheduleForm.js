@@ -95,7 +95,7 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
     }
 
     return (
-        <div>
+        <>
             <Button outline color="dark" onClick={toggle}>Edit</Button>
             <Modal isOpen={modal} toggle={toggle} scrollable={true}>
                 <ModalHeader toggle={toggle}>Edit Schedule</ModalHeader>
@@ -230,6 +230,6 @@ export default function EditScheduleForm({ id, setSchedules, setSchedule }) {
                     </Button>
                 </ModalFooter>
             </Modal>
-        </div>
+        </>
     );
 };

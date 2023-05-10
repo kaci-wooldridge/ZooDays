@@ -98,13 +98,6 @@ code {
   font-weight: 500;
 }
 
-/* .schedule-details-background {
-  background-image: url("https://prod.speakcdn.com/sitefiles/2147/images/cheeta-pattern.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
 .details-card {
   display: flex;
   align-items: center;
@@ -149,6 +142,10 @@ code {
 .schedule-buttons2 {
   display: flex;
   justify-content: center;
+}
+
+.add-button{
+  margin-right: 8px;
 }
 
 .del-button {

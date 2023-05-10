@@ -26,7 +26,7 @@ export default function Schedules() {
             deleteSchedule(id)
                 .then(() => {
                     getSchedules()
-            })
+                })
         }
     }
 
@@ -52,7 +52,8 @@ export default function Schedules() {
                                 <tr>
                                     <th>Schedule Name</th>
                                     <th>Day of Visit</th>
-                                    <th> </th>
+                                        <th> </th>
+                                        <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,12 +66,26 @@ export default function Schedules() {
                                             <td onClick={() => navigate(`/schedules/${schedule.id}`)}>
                                                 {new Date(schedule.day).toDateString()}
                                             </td>
+                                            <td className="text-center">
+                                                <div className="schedule-buttons">
+                                                <Button className="add-button" outline color="success" onClick={() => navigate(`/animals`)}>
+                                                    Add Animals
+                                                </Button>
+                                                <Button className="add-button" outline color="success" onClick={() => navigate(`/activities`)}>
+                                                    Add Activities
+                                                </Button>
+                                                <Button className="add-button" outline color="success" onClick={() => navigate(`/restaurants`)}>
+                                                    Add Restaurants
+                                                    </Button>
+                                                </div>
+                                            </td>
                                             <td className="text-end">
                                                 <div className="schedule-buttons">
                                                     <EditScheduleForm id={schedule.id} setSchedules={setSchedules} />
                                                     <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
                                                         Delete
                                                     </Button>
+
                                                 </div>
                                             </td>
                                         </tr>

@@ -57,7 +57,7 @@ export default function AddRestaurant({ direction, id }) {
         <div>
             <Button outline color="success" onClick={toggle}>+</Button>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Which schedule would you like to add this restaurant to?</ModalHeader>
+                <ModalHeader className="text-center" toggle={toggle}>Which schedule would you like to add this restaurant to?</ModalHeader>
                 <ModalBody>
                     <div className="text-center p-5">
                         <Dropdown isOpen={dropdownOpen} toggle={toggle2} direction={direction}>

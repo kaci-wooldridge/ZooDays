@@ -30,7 +30,7 @@ export default function NewSchedule( {setSchedules} ) {
 
     return (
         <>
-            <Button outline color="success" className="new-button" onClick={toggle}>
+            <Button color="success" className="new-button" onClick={toggle}>
                 New Schedule
             </Button>
             <Modal isOpen={modal} toggle={toggle}>
