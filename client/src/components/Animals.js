@@ -5,7 +5,6 @@ import { getAllAnimals } from "../modules/animalManager";
 import AddAnimal from "./AddAnimal";
 import Map from "./Map";
 
-
 export default function Animals() {
     const [animals, setAnimals] = useState([]);
     const navigate = useNavigate();
@@ -24,7 +23,8 @@ export default function Animals() {
         <>
             <div className="banner-image">
                 <div className="banner-text">
-                    <h1>Our Animals</h1>
+                    
+                    <div>Our Animals</div>
                 </div>
                 <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
             </div>

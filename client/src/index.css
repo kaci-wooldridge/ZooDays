@@ -1,3 +1,7 @@
+@import url('https://fonts.cdnfonts.com/css/wild-and-crazy');
+@import url('https://fonts.cdnfonts.com/css/adventpsychosis');
+@import url('https://fonts.cdnfonts.com/css/smiling-animal');
+
 body {
   
   margin: 0;
@@ -11,6 +15,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.banner-text{
+  font-family: 'Smiling Animal', sans-serif;
+  font-size: 70px;
 }
 
 .nav-bar {
@@ -291,7 +300,7 @@ code {
   height: auto;
   position: absolute;
   top: .5em;
-  left: 1em;
+  left: .7em;
   display: inline;
   z-index: 5;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .7);

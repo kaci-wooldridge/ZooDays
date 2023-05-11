@@ -23,7 +23,7 @@ export default function Activities() {
         <>
             <div className="banner-image2">
                 <div className="banner-text">
-                    <h1>Activities</h1>
+                    <div>Activities</div>
                 </div>
                 <img className="banner-bottom" src="https://prod.speakcdn.com/sitefiles/2147/images/texture-transition.png" alt="Decorative texture" />
             </div>
