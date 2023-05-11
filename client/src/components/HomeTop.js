@@ -48,10 +48,7 @@ export default function HomeTop() {
                 ))}
             </div>
 
-            <div className="hours-container text-center">
-                <div className="open-today">Open Today</div>
-                <div className="time-open">9:30am - 5:00pm</div>
-            </div>
+
         </div>
     );
 }

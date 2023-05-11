@@ -49,8 +49,10 @@ export default function AddActivity({ direction, id }) {
     const handleSave = (evt) => {
         evt.preventDefault();
         addActivity(activity);
+        setDropdownText("Schedule");
         toggle();
     };
+
 
     if (schedules.length === 0) {
         return null;

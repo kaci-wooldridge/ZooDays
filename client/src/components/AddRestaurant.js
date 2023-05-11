@@ -46,6 +46,7 @@ export default function AddRestaurant({ direction, id }) {
     const handleSave = (evt) => {
         evt.preventDefault();
         addRestaurant(restaurant);
+        setDropdownText("Schedule");
         toggle();
     };
 

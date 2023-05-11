@@ -49,6 +49,7 @@ export default function AddAnimal({direction, id}) {
     const handleSave = (evt) => {
         evt.preventDefault();
         addAnimal(animal);
+        setDropdownText("Schedule");
         toggle();
     };
 

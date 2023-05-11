@@ -128,13 +128,12 @@ export default function ScheduleDetails() {
                                                                                     <>
                                                                                         <div key={activity.id}
                                                                                             className="list-item schedule-details-activity-name"
-                                                                                            style={{ cursor: 'pointer' }}
                                                                                         >
-                                                                                            {activity?.name}
+                                                                                            {activity?.name} - {new Date(activity.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}
                                                                                         </div>
-                                                                                        <div className="time-hidden">
+                                                                                        {/* <div className="time-hidden">
                                                                                             {new Date(activity.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true })}
-                                                                                        </div>
+                                                                                        </div> */}
                                                                                     </>
                                                                                 )
                                                                             })

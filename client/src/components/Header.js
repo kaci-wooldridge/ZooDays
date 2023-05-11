@@ -23,7 +23,12 @@ export default function Header({ isLoggedIn, user }) {
             <>
               <NavbarBrand href="/" className="img">
                 <img className="logo-img" src={require('../images/logo3.jpg')} />
-              </NavbarBrand>
+            </NavbarBrand>
+            
+            <div className="hours-container text-center">
+              <div className="open-today">Open Today</div>
+              <div className="time-open">9:30am - 5:00pm</div>
+            </div>
 
 
             <NavbarToggler onClick={toggleNavbar} className="me-2" />

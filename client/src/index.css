@@ -272,6 +272,10 @@ code {
 }
 
 .home-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-image: url("https://prod.speakcdn.com/sitefiles/2147/images/cheeta-pattern.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -293,42 +297,12 @@ code {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .7);
 }
 
-.hours-container{
-  color:#fefeff;
-  background-color: #553e60;
-  max-width: 1300px;
-  height: 100px;
-  margin-top:30px;
-  border-radius: 40px;
-  padding: 10px;
-}
 
-.open-today{
-  font-size: 25px;
-  font-weight: 800;
-}
 
 .date-container {
   margin-bottom: 30px;
   font-weight: 400;
   font-size: large;
-}
-
-.time-hidden {
-  display: none;
-  background-color: #392443;
-  color: #fefeff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  width: 100px;
-  bottom: 110%;
-  left: 50%;
-  margin-left: -60px;
-
-  position: absolute;
-  z-index: 1;
 }
 
 .schedule-details-activity-name:hover+.time-hidden {
@@ -378,4 +352,84 @@ code {
 .zoo-map{
   margin-top: -50px;
   margin-bottom:20px;
+}
+
+.hours-container {
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: .2em;
+  left: 11em;
+  display: inline;
+  z-index: 5;
+}
+
+.open-today {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.time-open {
+  font-size: 12px;
+}
+
+.home-container2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  background-color: #c0abc8;
+  border-radius: 40px;
+
+  overflow: hidden;
+  max-width: 1300px;
+}
+
+.home-container3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background-color: #c0abc8;
+  border-radius: 40px;
+
+  overflow: hidden;
+  max-width: 1300px;
+}
+
+.home-fox-picture{
+  width: 35%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.home-elephant-picture {
+  width: 35%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.home-text{
+  text-align: center;
+  font-size: 150%;
+  font-weight: 800;
+  padding-left: 30px;
+  padding-right: 30px;
+  line-height: 50px;
+}
+
+@media (max-width: 768px) {
+  .home-text {
+    font-size: 120%;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-text {
+    font-size: 90%;
+    line-height: 20px;
+  }
 }
