@@ -5,6 +5,7 @@ import NewSchedule from './NewSchedule';
 import { useNavigate } from 'react-router-dom';
 import { deleteSchedule } from '../modules/scheduleManager';
 import EditScheduleForm from './EditScheduleForm';
+import DetailsModal from './DetailsModal';
 
 export default function Schedules() {
     const [schedules, setSchedules] = useState([]);
@@ -81,6 +82,7 @@ export default function Schedules() {
                                             </td>
                                             <td className="text-end">
                                                 <div className="schedule-buttons">
+                                                    <DetailsModal id={schedule.id} />
                                                     <EditScheduleForm id={schedule.id} setSchedules={setSchedules} />
                                                     <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
                                                         Delete

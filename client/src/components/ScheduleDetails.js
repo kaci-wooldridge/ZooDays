@@ -54,7 +54,6 @@ export default function ScheduleDetails() {
                     </div>
                 ) :
                     (
-
                         <div className="row d-flex justify-content-center details-card">
                             <div className="col-md-7">
                                 <div className="card p-3 py-4 schedule-details-card">
@@ -63,18 +62,15 @@ export default function ScheduleDetails() {
                                             x
                                         </Button>
                                     </div>
-
                                     <div className="text-center">
                                         <div className="date-container">Day of Visit:
                                             <div className="schedule-details-date-text">
                                                 {new Date(schedule?.day).toDateString()}
                                             </div>
                                         </div>
-
                                         <div className="px-4 mt-1">
                                             <p className="fonts">{ }</p>
                                         </div>
-
                                         <div>
                                             <Table className="chosen-table">
                                                 <thead className="table-elements">
@@ -160,17 +156,14 @@ export default function ScheduleDetails() {
                                         </div>
                                         <div className="schedule-buttons2">
                                             <EditScheduleForm id={id} setSchedule={setSchedule} />
-
                                             <Button className="del-button" outline color="danger" onClick={() => handleDelete(`${schedule.id}`)}>
                                                 Delete
                                             </Button>
                                         </ div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     )}
             </div >
         </div>
